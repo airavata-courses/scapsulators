@@ -1,5 +1,6 @@
 from flask import redirect, Blueprint, current_app
 from . import consumer
+import PIL.Image as Image, io, os
 
 bp = Blueprint('flask-consumer-blueprint', __name__)
 
@@ -18,4 +19,7 @@ def consume_topic_from_producer():
     consumed_data = my_consumer.consume()
     print(consumed_data, type(consumed_data))
     print(consumed_data.value)
-    return list(consumed_data.value.values())[0]
+    image = Image.open(io.BytesIO(consumed_data.value.values()))
+    image.save(os.path.join(os.getcwd(),'temp.gif'))
+    #return list(consumed_data.value.values())[0]
+    return f'Attempted to consume and save an image.'

@@ -16,7 +16,7 @@ In new terminal run the kafka-service:
 ```
 > pip install -r requirements.txt
 
-> cd flask-producer-app/ 
+> cd Flask-producer/ 
 
 > set FLASK_APP=flask-producer-app
 
@@ -26,7 +26,7 @@ In new terminal run the kafka-service:
 
 In new terminal run:
 
-> cd flask-consumer-app/ 
+> cd Flask-consumer/ 
 
 > set FLASK_APP=flask-consumer-app
 
