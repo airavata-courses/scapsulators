@@ -1,6 +1,6 @@
-Meeting Notes - 23rd Jan, 2022: 
+### Meeting Notes - 23rd Jan, 2022: 
 
-Discussion : 
+### Discussion : 
 1) We discussed the use case of our application and our initial plan is to create a weather report for identifying anomalies in the weather at a particular instant in time in the past. Our application will be used by meteorologists, weather enthusiast, geologists and marine biologists.
    The user can analyse and identify any anomalies in weather parameters through our GIF. Currently we are focussing on the below parameters : 
    i)   Reflectivity, 
@@ -12,7 +12,9 @@ Discussion :
 5) Allocated tasks to each individual in the team based on the programming language preferences.
 
 
-Action Items : 
+
+
+### Action Items : 
 1) Research what Reflectivity, Spectrum width, and Velocity mean and how can it be related to the weather predictions.
 2) What to write in the tool tip which will help the user understand the parameters we will be showing in our front end.
 3) Build on the current basic layout of the Napkin diagram.
