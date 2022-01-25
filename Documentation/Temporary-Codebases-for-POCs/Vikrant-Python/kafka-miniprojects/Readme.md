@@ -1,14 +1,12 @@
 # Connecting Flask Producer with Flask Consumer
 
 ## Pre-requisites:
+
+### Firing up Kafka Server using Docker:
 ```
-Navigate to the folder where *kafka* was extracted on your local machine.
+> Docker-kafka-startup\start-kafka.bat
 
-Run the zookeeper-service in one terminal:
-> bin\windows\zookeeper-server-start.bat config\zookeeper.properties
-
-In new terminal run the kafka-service:
-> bin\windows\kafka-server-start.bat config\server.properties
+> Docker-kafka-startup\create-topics.bat
 ```
 
 
@@ -18,26 +16,18 @@ In new terminal run the kafka-service:
 
 > cd Flask-producer/ 
 
-> set FLASK_APP=flask-producer-app
-
-> set FLASK_ENV=development
-
-> flask run --host=localhost --port=5000
+> startup.bat
 
 In new terminal run:
 
 > cd Flask-consumer/ 
 
-> set FLASK_APP=flask-consumer-app
-
-> set FLASK_ENV=development
-
-> flask run --host=localhost --port=5001
+> startup.bat
 
 
-Open the consumer endpoint in browser (localhost:5001); it'll wait for a message from Kafka-topic to show up from Producer application.
+Open the consumer endpoint in browser (http://localhost:5001/consumeTopicFromProducer); it'll wait for a message from Kafka-topic to show up from Producer application.
 
-From postman invoke the endpoint with appropriate message json-body: http://localhost:5000/pushTopicToConsumer
+Open the producer endpoint in browser (http://localhost:5000/pushTopicToConsumer); it'll generate a GIF image -> send it to the consumer -> consumer will read these bytes of data and regenerate the GIF.
 
-Your terminal that's running kafka-consumer should show the exact same message as json-body. The message has been delivered over an asynchronous message queue system via Kafka.
+The message has been delivered over an asynchronous message queue system via Kafka.
 ```

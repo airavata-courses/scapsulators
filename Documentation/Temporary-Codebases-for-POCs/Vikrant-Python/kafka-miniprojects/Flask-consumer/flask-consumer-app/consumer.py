@@ -7,7 +7,7 @@ class Consumer:
             topic_to_consume,
             bootstrap_servers = kafka_server,
             api_version = (0, 11, 15),
-            value_deserializer=lambda msg: json.loads(msg.decode('utf-8'))
+            #value_deserializer=lambda msg: json.loads(msg.decode('utf-8'))
         )
 
     def consume(self):

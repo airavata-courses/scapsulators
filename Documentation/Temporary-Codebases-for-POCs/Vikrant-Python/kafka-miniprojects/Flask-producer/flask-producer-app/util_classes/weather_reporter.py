@@ -1,4 +1,5 @@
 # Pyart is compatible only with Python 3.8x
+import io
 import os, pyart, numpy as np, imageio, warnings, matplotlib.pyplot as plt, shutil
 warnings.filterwarnings('ignore')
 from boto.s3.connection import S3Connection
@@ -126,6 +127,7 @@ class Weather_Reporter():
 
     def generate_images_for_animation_by_sweep(self, radar, station, tgt_folder, sweep_intervals=3, image_format='jpeg', verbose=True):
         """Generates a set of images that will be used to generate the GIF file.
+        Taking backup on 24th Jan 2021. Rather be sending byte-encoded JPG images.
 
         Args:
             radar ([pyart]): pyart-object got after reading the binary S3-file.
@@ -163,20 +165,81 @@ class Weather_Reporter():
                 plt.clf()
         if verbose:  print(res)
         return res
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
     def generate_animation(self, download_data_dir):
+        """Runs the entire pipeline for weather-report generation:
+        Downloads the s3-dataset, creates local directory for generating final GIF image. Removes the folder used for temporary image generation.
+        Taking backup on 24th Jan 2021. Rather be sending byte-encoded JPG images.
+
+        Args:
+            download_data_dir ([str]): Path where to download data: Ideally the /static/ folder within running application.
+
+        Returns:
+            [str]: Absolute-path for accessing the required GIF image.
+        """
+
+        radar = self.download_s3_object(download_data_dir)
+        TGT_FOLDER = os.path.join(download_data_dir,'visualizations',self.STATION)
+        self.create_path_if_not_exist(TGT_FOLDER)
+
+        RAW_FOLDER = os.path.join(TGT_FOLDER, 'raw')
+        self.create_path_if_not_exist(RAW_FOLDER)
+
+
+        images_for_animation = self.generate_images_for_animation_by_sweep(radar, self.STATION, RAW_FOLDER, 4)
+        imgs = [imageio.imread(img) for img in images_for_animation]
+        abs_gif_path = os.path.join(TGT_FOLDER,self.STATION)+'.gif'
+        imageio.mimwrite(abs_gif_path, imgs, fps=2)
+        shutil.rmtree(RAW_FOLDER)
+
+        return abs_gif_path
+
+
+
+'''
+
+    def generate_images_for_animation_by_sweep(self, radar, station, tgt_folder, sweep_intervals=3, image_format='jpeg', verbose=True):
+        """Generates a set of images that will be used to generate the GIF file.
+
+        Args:
+            radar ([pyart]): pyart-object got after reading the binary S3-file.
+            station ([str]): Radar-Station 4-letter code.
+            tgt_folder ([str]): Location where the raw images will be written.
+            sweep_intervals (int, optional): Interval-size governs number of volume-scans to use for GIF-generation. Defaults to 3.
+            feature_to_plot (str, optional): Can be (reflectivity, spectrum_width, velocity).
+                <Reflectivity> tells how dense the atmosphere was, and how strong the reflected RADAR signal was in Decibels relative to Z.
+                <Doppler-Specturm-Width> tells us how fast moisture particles are moving in atmosphere. Set of particles grouped together form one pixel on Volume-scan.
+                <Radial-Velocity-of-scatterers> the "scatterers" are what causes the transmitted signal to be returned to the Radar (eg: aerosols, hydrometeors and refractive index irregularities).
+                    This measurement corresponds to how fast these "scatterers" are moving away from the Radar.. Defaults to 'reflectivity'.
+            image_format (str, optional): Can be (jpeg, png, gif, ...). Defaults to 'jpeg'.
+            verbose (bool, optional): Used for controlling logging. Defaults to True.
+            Note: PPI is Plan Position Indicator for Radar
+        Returns:
+            res [list(str)]: List of file-names used for generating the overall GIF.
+        """
+        dataset_for_sweep = radar.fields[self.FEATURE_TO_VISUALIZE]['data'].data
+        res = []
+        my_figure = plt.figure(figsize = [10,8])
+        my_display = pyart.graph.RadarMapDisplay(radar)
+        for sweep_i in range(0,100,sweep_intervals):
+            if verbose:  print(f'Producing image for sweep={sweep_i}...')
+            try:
+                my_display.plot_ppi_map(self.FEATURE_TO_VISUALIZE, sweep=sweep_i, vmin=dataset_for_sweep.min(), vmax=dataset_for_sweep.max(), raster=True)
+                b = io.BytesIO()
+                plt.savefig(b, format='jpg')
+                res.append(b)
+                if verbose:  print(res)
+            except Exception as e:
+                if verbose:  print(f'Breaking from the loop. Exception={e}')
+                break
+            finally:
+                plt.clf()
+        return res
+
+
+
+    def generate_animation_array(self, download_data_dir):
         """Runs the entire pipeline for weather-report generation:
         Downloads the s3-dataset, creates local directory for generating final GIF image. Removes the folder used for temporary image generation.
 
@@ -196,10 +259,8 @@ class Weather_Reporter():
 
 
         images_for_animation = self.generate_images_for_animation_by_sweep(radar, self.STATION, RAW_FOLDER, 2)
-        imgs = [imageio.imread(img) for img in images_for_animation]
-        abs_gif_path = os.path.join(TGT_FOLDER,self.STATION)+'.gif'
-        imageio.mimwrite(abs_gif_path, imgs, fps=2)
-
         shutil.rmtree(RAW_FOLDER)
 
-        return abs_gif_path
+        return images_for_animation
+
+        '''
