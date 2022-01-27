@@ -1,0 +1,45 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js" integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            var socket = io.connect('http://localhost:5000/kafka');
+            
+            // Onclick of button-submit in the form emit() a signal to localhost:5000/kafka/kafkaconsumer over socket.
+            $('form#emit').submit(function(event) {
+                socket.emit('kafkaconsumer');
+                return false;
+            });
+
+            // How to consume response from my endpoints
+            socket.on('kafkaconsumer', function(msg) {
+                $('#consumer').append('<br>' + $('<div/>').text(msg.data).html());
+            });
+
+            
+            /*socket.on('kafkaconsumer1', function(msg) {
+                $('#consumer').html("")
+            });
+            socket.on('kafkaconsumer', function(msg) {
+                $('#consumer').append('<br>' + $('<div/>').text(msg.data).html());
+            });
+
+            socket.on('kafkaproducer', function(msg) {
+                $('#producer').append('<br>' + $('<div/>').text(msg.data).html());
+            });
+
+            socket.on('logs', function(msg) {
+                $('#log').append('<br>' + $('<div/>').text(msg.data).html());
+            });
+            */
+        });
+    </script>
+</head>
+<body>
+<form id="emit" method="POST" action='#'>
+    <input type="text" name="emit_data" id="emit_data" placeholder="Message">
+    <input type="submit" value="Echo">
+</form>
+</body>
+</html>

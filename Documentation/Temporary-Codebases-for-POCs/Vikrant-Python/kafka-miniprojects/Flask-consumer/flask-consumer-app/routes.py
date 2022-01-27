@@ -4,10 +4,10 @@ import PIL.Image as Image, io, os, shutil
 
 bp = Blueprint('flask-consumer-blueprint', __name__)
 
-@bp.route('/')
-def index():
-    return f'You are on the homepage for the Flask consumer application. Kafka server: {current_app.config.get("KAFKA_SERVER")}.'
-
+@app.route('/')
+@cross_origin()
+def home():
+    return send_from_directory('/app', "index.html")
 
 
 @bp.route('/consumeTopicFromProducer', methods=['GET', 'POST'])
