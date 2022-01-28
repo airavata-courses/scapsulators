@@ -1,8 +1,8 @@
-FROM continuumio/miniconda:latest
+FROM continuumio/anaconda:latest
 
 COPY . .
 
-RUN chmod +x boot.sh
+#RUN chmod +x boot.sh
 RUN conda env create -f environment.yml
 
 RUN echo "source activate env" > ~/.bashrc
@@ -11,4 +11,8 @@ ENV PATH /opt/conda/envs/env/bin:$PATH
 
 EXPOSE 5000
 
-ENTRYPOINT [ "./boot.sh" ]
+#ENTRYPOINT [ "./boot.sh" ]
+
+WORKDIR /weather_reporter
+
+CMD ["gunicorn", "--workers=2", "--bind=0.0.0.0:5000", "app:app"]
