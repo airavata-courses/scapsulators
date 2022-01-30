@@ -3,6 +3,7 @@ from utils.producer import Producer
 from utils.weather_reporter import Weather_Reporter
 from PIL import Image
 from flask_kafka import FlaskKafka
+import signal
 from threading import Event
 from dateutil import parser
 import io, sys, json, time
@@ -13,6 +14,14 @@ app.config.from_pyfile('config.py')
 INTERRUPT_EVENT = Event()
 print(app.config.get('KAFKA_SERVER'))
 bus = FlaskKafka(INTERRUPT_EVENT, bootstrap_servers=app.config.get('KAFKA_SERVER'), group_id=app.config.get('GROUP_ID'))
+
+
+def listen_kill_server():
+    signal.signal(signal.SIGTERM, bus.interrupted_process)
+    signal.signal(signal.SIGINT, bus.interrupted_process)
+
+
+
 
 @app.route('/')
 def landing_page():
@@ -33,9 +42,16 @@ def push_topic_to_consumer(consumed_message):
     Returns:
         [str]: [description]
     """
-    print(type(consumed_message),consumed_message)
     print(f'Received a request-message from topic={app.config.get("REQUEST_TOPIC")}: {consumed_message.value}')
-    request_parameters = json.loads(consumed_message.value)
+    my_producer = Producer(kafka_server=app.config.get('KAFKA_SERVER'))
+
+    try:
+        request_parameters = json.loads(consumed_message.value)
+    except Exception as e:
+        print(f'Something went wrong while trying to convert request-message to JSON...{e}')
+        my_producer.publish(topic=app.config.get('RESPONSE_TOPIC'), message=b'{"msg":"Invalid JSON object..\nTry something like:\n{"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}"}')
+        return f'Reached end of messages for Kafka Topic = {consumed_message}'
+
     visualize = request_parameters.get('visualize')
     station = request_parameters.get('station')
     timestamp = request_parameters.get('timestamp')
@@ -58,7 +74,6 @@ def push_topic_to_consumer(consumed_message):
         im.save(buffer, format='gif', save_all=True)
         gif_img_buffer = buffer.getvalue()
         print(f'Original Size of image bytestream will be {sys.getsizeof(gif_img_buffer)}')
-        my_producer = Producer(kafka_server=app.config.get('KAFKA_SERVER'))
         my_producer.publish(topic=app.config.get('RESPONSE_TOPIC'), message=gif_img_buffer)
     except Exception as e:
         print(f'Something went wrong while reading/converting the image into bytearray...\n{e}')
@@ -69,4 +84,5 @@ def push_topic_to_consumer(consumed_message):
 
 if __name__=='__main__':
     bus.run()
-    app.run(host='0.0.0.0', port='5000', use_reloader=False)
+    listen_kill_server()
+    app.run(host=app.config.get('FLASK_HOST'), port=app.config.get('FLASK_PORT'), use_reloader=False)

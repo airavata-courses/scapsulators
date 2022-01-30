@@ -5,7 +5,7 @@ from boto.s3.connection import S3Connection
 
 
 
-class Weather_Reporter():
+class Weather_Reporter:
     """Module to download S3 data for NEXRAD (Next Generation Radar) weather monitoring and GIF image generation.
     """
 
