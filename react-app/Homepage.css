@@ -1,0 +1,51 @@
+.bigcard{
+    height:fit-content;
+    width: fit-content;
+    margin-left: 20vh;
+    margin-top: 10vh;
+}
+
+.label {
+	/* display: flex;
+	flex-direction: row;
+	justify-content: center; */
+	/* text-align: left; */
+
+    margin-right: 10px;
+}
+
+
+.input {
+	/* display: flex;
+	flex-direction: row;
+	justify-content: center;
+	text-align-last: center;*/
+
+	width: 60%;
+    margin-left: 10px;
+}
+
+.button {
+	background-color: #c78813; /*Orange G*/
+	border: none;
+	border-radius: 2px;
+	color: white;
+	padding: 5px 10px;
+	margin-top: 1rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: "Nunito", sans-serif;
+	width: 25%;
+	cursor: pointer;
+}
+.button:hover {
+	background-color: #f3a412;
+}
+
+.datetime {
+    font-size: 12px;
+    /* margin: 4vh; */
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
