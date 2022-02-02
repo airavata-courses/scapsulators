@@ -1,4 +1,4 @@
-import warnings
+import warnings, json, sys
 warnings.filterwarnings('ignore')
 from siphon.radarserver import RadarServer
 from pprint import pprint
@@ -40,3 +40,12 @@ class Radar_Stations:
         
         pprint(locations)
         return locations
+
+
+    def get_stations_bytestream(self, stations_list):
+        print('Converting the dictionary to bytes...')
+        stations_str = json.dumps(stations_list)
+        print('Converted the dictionary to string...')
+        stations_buffer = bytes(stations_str, encoding='utf-8')
+        print(f'Original Size of image bytestream will be {sys.getsizeof(stations_buffer)}')
+        return stations_buffer
