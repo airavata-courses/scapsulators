@@ -1,4 +1,4 @@
-package com.ads.project1.audit.models;
+package com.ads.project1.authentication.models;
 
 public class OutputBody {
 

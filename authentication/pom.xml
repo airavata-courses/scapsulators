@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ads.project1</groupId>
-	<artifactId>audit</artifactId>
+	<artifactId>authentication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>audit</name>
-	<description>Audit microservice for project 1</description>
+	<name>authentication</name>
+	<description>Authentication microservice for project 1</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

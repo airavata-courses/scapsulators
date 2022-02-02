@@ -1,10 +1,10 @@
-package com.ads.project1.audit;
+package com.ads.project1.authentication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuditApplicationTests {
+class AuthenticationApplicationTests {
 
 	@Test
 	void contextLoads() {

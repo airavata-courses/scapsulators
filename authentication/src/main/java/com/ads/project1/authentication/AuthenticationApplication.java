@@ -1,4 +1,4 @@
-package com.ads.project1.audit;
+package com.ads.project1.authentication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
-public class AuditApplication {
+public class AuthenticationApplication {
 	
 	@Bean
 	public WebClient.Builder getWebClientBuilder(){
@@ -15,7 +15,7 @@ public class AuditApplication {
 	
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuditApplication.class, args);
+		SpringApplication.run(AuthenticationApplication.class, args);
 	}
 
 }
