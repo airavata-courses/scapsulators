@@ -8,73 +8,43 @@ Spring 2022 Project
 
 <ul>
 <li>This standalone microservice is intended to fetch an intuitive <b>GIF image</b>, for visualizing a specific radar-station's surroundings at a specific point in time using <b>NEXRAD's S3 data-lake</b>.</li>
-<li>This service is kept separate from the <b>radar-stations-fetcher</b> microservice since we don't want to keep the client waiting too long while media streaming over Kafka is in progress for this service. Similarly, this separation will <b>avoid a single-point of failure</b> for accessing all NEXRAD data.</li>
+<li>This service is kept separate from the <b>radar-stations-fetcher</b> microservice since we don't want to keep the client waiting too long while media streaming is in progress for this service. Similarly, this separation will <b>avoid a single-point of failure</b> for accessing all NEXRAD data.</li>
 </ul>
 
 ## Working
 
 <ul>
-<li>Weather-Reporter runs a <a href="https://github.com/NimzyMaina/flask_kafka/blob/master/flask_kafka/consumer.py">FlaskKafka</a> thread to constantly listen for incoming Kafka messages over the topic <b><i>REQUEST_REPORT</i></b>.</li>
+<li>Weather-Reporter runs a Flask application to accept a JSON-body request and transmit out a GIF image.</li>
 <li>The message content should be a bytestream of JSON-like request-parameters.
-
 <code>SAMPLE REQUEST-BODY: {"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}</code>
 </li>
 
 <li>The <i><b>"visualize"</i></b> parameter can also take on <i>velocity</i>, or <i>spectrum_width</i> values. Some insight into these parameters is <a href="https://github.com/airavata-courses/scapsulators/wiki/Weather-enthusiasts-assemble"> here.</a>
 </li>
-<li>The thread will route outging Kafka messages over the topic <b><i>WEATHER_REPORT</i></b>. The response will be the aforementioned GIF image for visualizing the weather-report for a specific radar-station at that point in time.</li>
-<li>The overall service is wrapped inside a <b>Flask application</b> with decorator <i>`@bus.handle`</i> and dependencies are handled using a Conda environment.</li>
-<li>Please ensure your containerized Kafka-server is already up and running so that you can test the consume/publish functionalities.</li>
+<li>The response will be the aforementioned GIF image for visualizing the weather-report for a specific radar-station at that point in time.</li>
 </ul>
 
 ## Installation 
 
 ### Software Requirements
 
-* Anaconda
-* Python 3.8.8
-* Virtual Environment configured using `environment.yml`
-
-### Create a virtual environment based on Python `3.8.8`
-
-Install Anaconda from its [official link](https://docs.anaconda.com/anaconda/install/index.html).
-
-All the requirements for the repository are mentioned in the file `environment.yml`.
-Once the initial setup is done, go ahead and activate the environment using the command below:
-
-> conda env create -f environment.yml 
-
-or by following the blog [here](https://www.earthdatascience.org/courses/intro-to-earth-data-science/python-code-fundamentals/use-python-packages/use-conda-environments-and-install-packages/).
-
-A necessary dependency `pyart` only supports Python <=3.8.8, and `pip` doesn't work for a few modules like `metpy`, but you need not worry about all this. Setting up the virtual conda environment should resolve this. Drop an `issue` in the repository, should you face issues.
+* Docker 20.10.11
 
 ### Firing up the microservice
 
-Activate the virtual environment.
+Run the docker container using the provided `.bat` file:
 
-> source activate env
+`> start-app.bat`
 
-The server for the python app is running on port `5001`, consumes the Kafka-topic `REQUEST_REPORT`, responds over the Kafka-topic `WEATHER_REPORT`. All this is configurable from the `config.env` file.
-
-To start the server, execute the command below in the virtual environment context.
-
-`> python3 weather_reporter\app.py`
-
-
-All someone needs to do is publish a message over `REQUEST_REPORT`, and consume the response over `WEATHER_REPORT`.
+The server for the python app is running on port `5001`.
+This is configurable from the `config.env` file.
 
 
 ## Implementation Status
 
-The service uses `kafka` for asynchronous communication and will help us in the future with implementing a scalable and highly-available architecture. 
+The service uses `REST` for asynchronous communication, and we will use `Kafka` in the future to implement a scalable and highly-available architecture.
 
-I intend to containerize these services but making a containerized Flask application communicate with a containerized Kafka server is harder than it sounds. 
-
-However, the service itself runs perfectly and produces required output.
-
-`Weather_Reporter` class in `weather_reporter.py` is used to parse the required NEXRAD for S3 data using the `s3.boto` module. There's a great amount of documentation for each function to interpret the underlying data, and subsequently generate the GIF iamge.
-
-`Consumer`, and `Producer` in `utils\consumer.py`, and `utils\producer.py` are respectively used to wrap all `kafka` functionalities in an easy-to-read format.
+`Weather_Reporter` class in `weather_reporter.py` is used to parse the required NEXRAD for S3 data using the `s3.boto` module. There's a good amount of documentation for each function to interpret the underlying data, and subsequently generate the GIF iamge.
 
 `app.py` defines the Flask application functionality: `routes` aren't the focus here.
 

@@ -1,0 +1,12 @@
+version: '2'
+services:
+ app:
+    build: .
+    ports:
+      - "5001:5001"
+    hostname: app
+    container_name: app
+
+networks:
+  default:
+      name: flask

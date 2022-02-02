@@ -1,7 +1,8 @@
 # Pyart is compatible only with Python 3.8x
-import os, pyart, imageio, warnings, matplotlib.pyplot as plt, shutil
+import os, pyart, imageio, warnings, matplotlib.pyplot as plt, shutil, io
 warnings.filterwarnings('ignore')
 from boto.s3.connection import S3Connection
+from PIL import Image
 
 
 
@@ -21,6 +22,7 @@ class Weather_Reporter:
             day (str, optional): Defaults to '20'.
             hour (str, optional): Defaults to '10'.
             minute (str, optional): Defaults to '59'.
+            
         """
 
         self.FEATURE_TO_VISUALIZE = feature_to_visualize
@@ -33,6 +35,7 @@ class Weather_Reporter:
         self.my_prefix = '/'.join([self.YEAR, self.MONTH, self.DAY, self.STATION])+'/'
         self.conn = S3Connection(anon=True)
         self.bucket = self.conn.get_bucket('noaa-nexrad-level2')
+        self.gif_abs_path = ''
     
 
 
@@ -208,4 +211,17 @@ class Weather_Reporter:
         imageio.mimwrite(abs_gif_path, imgs, fps=3)
         shutil.rmtree(RAW_FOLDER)
 
-        return abs_gif_path
+        self.gif_abs_path = abs_gif_path
+
+    def get_image_bytestream(self):
+        """Generates the Bytes from GIF image using the absolute path within the application.
+
+        Returns:
+            [bytes]: Bytestream from GIF image.
+        """
+        print('Converting the GIF image to bytes...')
+        img = Image.open(self.gif_abs_path)
+        img.seek(0)
+        buffer = io.BytesIO()
+        img.save(buffer, format='gif', save_all=True)
+        return buffer.getvalue()
