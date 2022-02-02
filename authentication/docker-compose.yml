@@ -1,0 +1,9 @@
+version: "3"
+services:
+  authentication:
+    image: 'authentication:latest'
+    ports:
+      - '8081:8081'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  
