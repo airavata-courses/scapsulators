@@ -1,0 +1,9 @@
+version: "3"
+services:
+  audit:
+    image: 'audit:latest'
+    ports:
+      - '8084:8084'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  
