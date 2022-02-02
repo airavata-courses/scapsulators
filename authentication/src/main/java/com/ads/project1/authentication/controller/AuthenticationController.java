@@ -28,13 +28,20 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Mono<OutputBody> autheticateUser(@RequestBody MultiValueMap body) {
-		
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		String password = body.get("password").toString().replaceAll("\\[", "").replaceAll("\\]", "");
+		
+		try {
+			logger.info("AuthenticationController : Authenticating username = "+username);		
 		Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/authenticate/" + username + "/"+ password).retrieve().bodyToMono(OutputBody.class);
-		//Mono<String> status = webClientBuilder.build().get().uri("http://localhost:8082/database/authenticate/" + username + "/"+ password).retrieve().bodyToMono(String.class);
-			
+		logger.info("AuthenticationController : Authenticatiopn complete for username = "+username);
 		return status;
+		} catch(Exception e) {
+			logger.info("AuthenticationController : Error while authenticating username = "+username);
+			e.printStackTrace();
+			OutputBody error = new OutputBody("Internal Service Error", "404");
+			return Mono.just(error);			
+		}
 	}
 	
 	
@@ -51,10 +58,18 @@ public class AuthenticationController {
 		
 		String emailAdd = body.get("emailAdd").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		
+		try {
+			logger.info("AuthenticationController : Signing Up username = "+username);		
 		
-		Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/signup/" + username + "/"+ password + "/" + firstName + "/" + lastName + "/" + city + "/" + state + "/" + secQtAns + "/" + emailAdd).retrieve().bodyToMono(OutputBody.class);
-			
-		return status;
+			Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/signup/" + username + "/"+ password + "/" + firstName + "/" + lastName + "/" + city + "/" + state + "/" + secQtAns + "/" + emailAdd).retrieve().bodyToMono(OutputBody.class);
+			logger.info("AuthenticationController : Signing Up Complete for username = "+username);		
+			return status;
+		}catch(Exception e) {
+			logger.info("AuthenticationController : Error while signing up username = "+username);
+			e.printStackTrace();
+			OutputBody error = new OutputBody("Internal Service Error", "404");
+			return Mono.just(error);			
+		}
 	}
 	
 	
@@ -62,20 +77,39 @@ public class AuthenticationController {
 	public Mono<OutputBody> forgotpassword(@RequestBody MultiValueMap body) {
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		String secQtAns = body.get("secQtAns").toString().replaceAll("\\[", "").replaceAll("\\]", "");
+		try {
+			logger.info("AuthenticationController : In forgot password for username = "+username);		
 		
-		Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/forgotpassword/" + username + "/"+ secQtAns).retrieve().bodyToMono(OutputBody.class);
-		return status ;
+			Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/forgotpassword/" + username + "/"+ secQtAns).retrieve().bodyToMono(OutputBody.class);
+			logger.info("AuthenticationController : Forgot Password Complete for username = "+username);	
+			return status ;
+		}catch(Exception e) {
+			logger.info("AuthenticationController : Error in forgot password for username = "+username);
+			e.printStackTrace();
+			OutputBody error = new OutputBody("Internal Service Error", "404");
+			return Mono.just(error);			
+		}
 	}
 	
 	
 	@RequestMapping(value = "/updatepassword", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Mono<OutputBody> updatepassword(@RequestBody MultiValueMap body) {
+		
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		String password = body.get("password").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		
-		
-		Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/updatepassword/" + username + "/"+ password).retrieve().bodyToMono(OutputBody.class);
-		return status ;
+		try {
+			logger.info("AuthenticationController : Updating password for username = "+username);		
+	
+			Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/updatepassword/" + username + "/"+ password).retrieve().bodyToMono(OutputBody.class);
+			logger.info("AuthenticationController : Update Password Complete for username = "+username);	
+			return status ;
+		}catch(Exception e){
+			logger.info("AuthenticationController : Error while updating the password for username = "+username);
+			e.printStackTrace();
+			OutputBody error = new OutputBody("Internal Service Error", "404");
+			return Mono.just(error);			
+		}
 	}
 	
 	
