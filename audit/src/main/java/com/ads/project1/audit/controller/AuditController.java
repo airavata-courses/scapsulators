@@ -31,8 +31,14 @@ public class AuditController {
 	@Autowired
 	private WebClient.Builder webClientBuilder;
 	
+	/*
+	 * Input Parameters  - username, date, time, nexradstation
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To save user data for auditory purpose
+	 * Author            - Rutuja Jadhav  
+	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Mono<OutputBody> signup (@RequestParam("username") String username, @RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("nexradstation") String nexradstation) {
+	public Mono<OutputBody> auditSave (@RequestParam("username") String username, @RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("nexradstation") String nexradstation) {
 		
 		try {
 			logger.info("AuditController Microservice : Saving data = "+ username+ " "+ date+ " "+ time+  "  "+ nexradstation);
@@ -49,8 +55,14 @@ public class AuditController {
 	}
 	
 	
+	/*
+	 * Input Parameters  - username
+	 * Output Parameters - OutputBodyAuditFetch : message, status, auditDetails
+	 * Purpose           - To fetch user's audit data
+	 * Author            - Rutuja Jadhav  
+	 */
 	@RequestMapping(value = "/fetch", method = RequestMethod.GET)
-	public Mono<OutputBodyAuditFetch> signup (@RequestParam("username") String username) {
+	public Mono<OutputBodyAuditFetch> auditFetch (@RequestParam("username") String username) {
 		try {
 			logger.info("AuditController Microservice : Fetching audit data for username = "+ username);
 		

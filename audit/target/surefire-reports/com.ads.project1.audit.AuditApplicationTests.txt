@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.ads.project1.audit.AuditApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.475 s - in com.ads.project1.audit.AuditApplicationTests
