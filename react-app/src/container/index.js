@@ -9,7 +9,6 @@ import {
   import RegisterPage from '../components/RegisterPage'
   import ForgetPasswordPage from '../components/ForgetPasswordPage'
   import HomePage from '../components/HomePage'
-  import Dataplot from '../components/Dataplot'
   import { useAuth } from "../context/GlobalContext"
 
 function Index() {
@@ -24,6 +23,7 @@ function Index() {
           <Route path="/register" element={<RegisterPage/>} />
           <Route path="/forget-password" element={<ForgetPasswordPage/>} />
           <Route path="/home" element={<HomePage/>} />
+          <Route path='*' element={<LandingPage/>}/>
       </Routes>
       <Footer />
   </div>
@@ -37,6 +37,8 @@ else {
            <Route exact path="/" element={<LandingPage/>}/>
            <Route path="/register" element={<RegisterPage/>} />
            <Route path="/forget-password" element={<ForgetPasswordPage/>} />
+           <Route path="/test" element={<HomePage/>} />
+           <Route  path='*' element={<LandingPage/>}/>
        </Routes>
        <Footer />
    </div>
