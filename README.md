@@ -4,12 +4,17 @@ Spring 2022 Project
 
 # Radar-Stations Fetcher Service
 
+
 ## Functionality/Motivation
 
 <ul>
 <li>This standalone microservice is intended to fetch a neat <b>JSON data structure</b>, for mapping geographic-regions to individual radar-station codes maintained on <b>NEXRAD's S3 data-lake</b>.</li>
 <li>This service is kept separate from the <b>weather-reporter</b> microservice since we don't want to keep the client waiting too long while media streaming is in progress for the latter service. Similarly this separate service will avoid a single-point of failure for accessing all NEXRAD data.</li>
 </ul>
+
+
+#### <i>Ad-hoc change: This microservice has been merged into the <code>report-weather</code> microservice for now.</i>
+
 
 ## Working
 
