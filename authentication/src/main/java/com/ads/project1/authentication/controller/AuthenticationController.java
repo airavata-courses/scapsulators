@@ -26,6 +26,12 @@ public class AuthenticationController {
 	@Autowired
 	private WebClient.Builder webClientBuilder;
 	
+	/*
+	 * Input Parameters  - MultiValueMap
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To authenticate the user details when he/she is logging into our application
+	 * Author            - Rutuja Jadhav  
+	 */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Mono<OutputBody> autheticateUser(@RequestBody MultiValueMap body) {
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
@@ -45,8 +51,14 @@ public class AuthenticationController {
 	}
 	
 	
-	@RequestMapping(value = "/signup", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	
+	/*
+	 * Input Parameters  - MultiValueMap
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To save the user details when he/she is signing up for our application.
+	 * Author            - Rutuja Jadhav  
+	 */
+
+	@RequestMapping(value = "/signup", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)	
 	public Mono<OutputBody> signup (@RequestBody MultiValueMap body) {
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		String password = body.get("password").toString().replaceAll("\\[", "").replaceAll("\\]", "");
@@ -72,7 +84,13 @@ public class AuthenticationController {
 		}
 	}
 	
-	
+	/*
+	 * Input Parameters  - MultiValueMap
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To check the security question answer to allow the user to change his/her password.
+	 * Author            - Rutuja Jadhav  
+	 */
+
 	@RequestMapping(value = "/forgotpassword", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Mono<OutputBody> forgotpassword(@RequestBody MultiValueMap body) {
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
@@ -91,7 +109,13 @@ public class AuthenticationController {
 		}
 	}
 	
-	
+	/*
+	 * Input Parameters  - MultiValueMap
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To update the password.
+	 * Author            - Rutuja Jadhav  
+	 */
+
 	@RequestMapping(value = "/updatepassword", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Mono<OutputBody> updatepassword(@RequestBody MultiValueMap body) {
 		

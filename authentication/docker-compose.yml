@@ -1,9 +1,33 @@
 version: "3"
 services:
+  database-connect:
+    image: 'database-connect:latest'
+    container_name: database-connect
+    ports:
+      - '8082:8082'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  
+  audit:
+    image: 'audit:latest'
+    ports:
+      - '8084:8084'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+
   authentication:
     image: 'authentication:latest'
     ports:
       - '8081:8081'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
-  
+      
+  mongodb:
+    image: mongo:5.0
+    hostname: mongodb
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=PROJECT1-ADMIN
+      - MONGO_INITDB_ROOT_PASSWORD=Project1-ADS

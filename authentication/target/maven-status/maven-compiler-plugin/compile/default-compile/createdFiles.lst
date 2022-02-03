@@ -1,0 +1,4 @@
+com\ads\project1\authentication\models\OutputBody.class
+com\ads\project1\authentication\controller\AuthenticationController.class
+com\ads\project1\authentication\AuthenticationApplication.class
+com\ads\project1\authentication\models\User.class
