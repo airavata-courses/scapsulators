@@ -1,7 +1,8 @@
 const {
     register,
     login,
-    forgot
+    forgot,
+    updatepass
   } = require("../controllers/authenticate");
 
   const {
@@ -15,7 +16,8 @@ const router = express.Router();
 router.post("/login", login);
 router.post("/register", register);
 router.post("/forgot", forgot);
+router.post("/updatepass", updatepass);
 
-router.get("/getimg", getImg);
+router.post("/getimg", getImg);
 
 module.exports = router;
