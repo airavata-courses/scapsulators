@@ -37,6 +37,16 @@ class Weather_Reporter:
         self.bucket = self.conn.get_bucket('noaa-nexrad-level2')
         self.gif_abs_path = ''
     
+    
+    
+    def check_params_valid(self):
+        """Checks if request-parameters are as per expectation, 'visualize' parameter has appropriate value.
+
+        Returns: 0 if invalid, 1 if valid
+        """
+        if None in [self.FEATURE_TO_VISUALIZE, self.STATION, self.YEAR, self.DAY, self.MONTH] or self.FEATURE_TO_VISUALIZE not in ['velocity', 'reflectivity', 'spectrum_width']:
+            return 0
+        return 1
 
 
     
@@ -63,9 +73,15 @@ class Weather_Reporter:
         bucket_list = list(self.bucket.list(prefix = self.my_prefix))
         
         if len(bucket_list)==0:
-            self.HOUR = str(int(self.HOUR)-1)
+            if self.HOUR>'00':
+                self.HOUR = str(int(self.HOUR)-1).zfill(2)
+                print(f'\n\nNo potential objects found.. Reducing hour by 1 and checking again for HOUR={self.HOUR} , prefix={self.my_prefix}..')
+            elif self.DAY>'00':
+                self.DAY = str(int(self.DAY)-1).zfill(2)
+                print(f'\n\nNo potential objects found.. Reducing day by 1 and checking again for DAY={self.DAY} , prefix={self.my_prefix}..')
+            elif self.DAY=='00' and self.HOUR=='00':
+                raise KeyError(f'No S3 object found for this station {self.STATION}!')
             self.set_search_prefix()
-            print(f'\n\nNo potential objects found.. Reducing day by 1 and checking again for DAY={self.DAY} , prefix={self.my_prefix}..')
             return self.get_s3_object(verbose)
 
         desired_s3_object = None
@@ -102,10 +118,14 @@ class Weather_Reporter:
         Args:
             folder ([type]): [description]
             verbose (bool, optional): [description]. Defaults to True.
+        Returns:
+            [int]: 0 if path already exists, 1 if path created just now.
         """    
         if not os.path.exists(folder):
             if verbose:  print(f'Path doesnt exist. Creating it now... {folder}')
             os.makedirs(folder)
+            return 1
+        return 0
 
 
 
@@ -121,10 +141,9 @@ class Weather_Reporter:
             [PyArt-object]: Dataset of radar measurements and metadata for corresponding query.
         """
         desired_s3_object = self.get_s3_object(verbose=True)
-        #folder_path = os.path.join(os.getcwd(), 'data', self.STATION)
         folder_path = os.path.join(download_data_dir, 'data', self.STATION)
         
-        self.create_path_if_not_exist(folder_path)
+        _ = self.create_path_if_not_exist(folder_path)
 
         fname = desired_s3_object.name.split("/")[-1]
         file_path = os.path.join(folder_path, fname)
@@ -185,33 +204,39 @@ class Weather_Reporter:
         if verbose:  print(res)
         return res
     
+
+
+
     
     def generate_animation(self, download_data_dir):
         """Runs the entire pipeline for weather-report generation:
         Downloads the s3-dataset, creates local directory for generating final GIF image. Removes the folder used for temporary image generation.
+        Sets an attribute for absolute-path for accessing the required GIF image.
 
         Args:
             download_data_dir ([str]): Path where to download data: Ideally the /static/ folder within running application.
-
-        Returns:
-            [str]: Absolute-path for accessing the required GIF image.
         """
 
         radar = self.download_s3_object(download_data_dir)
         TGT_FOLDER = os.path.join(download_data_dir,'visualizations',self.STATION)
-        self.create_path_if_not_exist(TGT_FOLDER)
+        _ = self.create_path_if_not_exist(TGT_FOLDER)
 
         RAW_FOLDER = os.path.join(TGT_FOLDER, 'raw')
-        self.create_path_if_not_exist(RAW_FOLDER)
+        _ = self.create_path_if_not_exist(RAW_FOLDER)
 
 
-        images_for_animation = self.generate_images_for_animation_by_sweep(radar, self.STATION, RAW_FOLDER, 2)
+        images_for_animation = self.generate_images_for_animation_by_sweep(radar, self.STATION, RAW_FOLDER, 3)
         imgs = [imageio.imread(img) for img in images_for_animation]
         abs_gif_path = os.path.join(TGT_FOLDER, ''.join([self.STATION, self.YEAR, self.MONTH, self.MINUTE]))+'.gif'
         imageio.mimwrite(abs_gif_path, imgs, fps=3)
         shutil.rmtree(RAW_FOLDER)
 
         self.gif_abs_path = abs_gif_path
+
+
+
+
+
 
     def get_image_bytestream(self):
         """Generates the Bytes from GIF image using the absolute path within the application.

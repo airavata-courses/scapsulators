@@ -1,2 +1,2 @@
 docker-compose rm -svf
-docker-compose up
+docker-compose --compatibility up

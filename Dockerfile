@@ -8,7 +8,7 @@ RUN echo "source activate env" > ~/.bashrc
 
 ENV PATH /opt/conda/envs/env/bin:$PATH
 
-EXPOSE 5001
+EXPOSE 5006
 
 WORKDIR /weather_reporter
 

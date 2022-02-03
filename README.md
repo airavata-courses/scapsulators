@@ -36,8 +36,10 @@ Run the docker container using the provided `.bat` file:
 
 `> start-app.bat`
 
-The server for the python app is running on port `5001`.
-This is configurable from the `config.env` file.
+The server for the python app is running on port `5006`. This is configurable from the `config.env` file.
+
+### Note:
+Building the Docker image takes time ($\approx$20 minutes)- the Python dependencies of scientific libraries (PyArt, metpy, etc.) are quite heavy.
 
 
 ## Implementation Status

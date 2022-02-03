@@ -1,11 +1,16 @@
 version: '2'
 services:
- app:
+ weather-reporter:
     build: .
     ports:
-      - "5001:5001"
-    hostname: app
-    container_name: app
+      - "5006:5006"
+    hostname: weather-reporter
+    container_name: weather-reporter
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 4g
 
 networks:
   default:
