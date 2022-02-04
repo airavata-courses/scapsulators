@@ -7,66 +7,44 @@ Spring 2022 Project
 ## Functionality/Motivation
 
 <ul>
-  <li>This is the <b> heart </b> of all microservices. This is the connecting point from the front-end to all the microservices. And believe me it handles all kinds of errors!</li>
-  <li>This service is completely <b> dockerized </b> and ready to interact with all microservices. One prerequisite all microservices need to be in the same docker-network. Not thaat a big of a deal with a docker file. </li>
+  <li>This is the viewing surface of the applications, a very user-friendly and easy on the eyes application for the users.</li>
+  <li> This is also been dockerized and can be run by the basic start script. The interface has been designed to be as intuitive as possible. </li>
 </ul>
 
 ## Working
 
 <ul>
-<li>Gateway runs a Node.js server powered by express.js, it sends json requests, url-encoded requests to the other microservices, there is also a testing version for kafka which is not included in the project 1</li>
-<li>The gateway is divided into three services for now, 1) Authenticate, 2) Audit, and 3) Weather Reporting Gif </li>
+<li>The frontend is a reactjs application which uses axios to make API calls for all the services</li>
+<li>The UI is divided into 1) Login Landing Page, 2) Sign-Up/ Reset password page, 3) Home Page</li>
   <br> </br>
-  <li> <b> Authenticate </b> :- Login, Register and Update Password</li>
-  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://{url}/authenticate?username=shubhpatra </li>
+  <li> The login page is straight forward it calls onto the authentication microservice via the API gateway </li>
+  <li> The sign-up page registers new users and authenticates them </li>
   <br> </br>
-  <li> <b> Audit </b> :- Fetch and Update History log of the user. </li>
-  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://{url}/audit/fetch?username=shubhpatra </li>
-  <br> </br>
-  <li> <b> Weather Reporting Gif </b>:- Sends a byte-array of generated gif image </li>
-  <li> <code>SAMPLE REQUEST-BODY: {"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}</code> </li>
-  <li> Response : ByteArray[] Gif Image
-
-<br> </br>
+  <li> The homepage has brief description on the various services and has 2 types of querry outlets, one via the Audit table, a user can simply click on a particular history row and generate a Gif image </li>
+   <li> The second mode of querrying is via specific field drop-box and generate the required querry</li>
 
 ## Installation 
 
-### Prerequisites
-Before you start testing the gateway, we need to make sure all the other microservices are up and running. Also, please make sure all dockers are in the same network, this can be done by checking the <b> docker-compose.yml </b> file.
 
-Second prerequisite is the .env file in the gateway directory, this contains all the secret information, ideally this not uploaded in git. But for an easier submission we have included it, make sure all the docker names are correct for the respective microservice. 
-
-If you're using current branch, make sure to build the Java Microservice as it creates all the docker networks. All this will be mitigated in the master branch.
 
 ### Software Requirements
 
 * Docker 20.10.11
 
-### Firing up the gateway
+### Hosting the frontend.
 
-Run the docker container using the provided `make` file:
+Make sure to run gateway and complete gateway prerequisites. After that
 
-`> cd gateway`
-<br> </br>
-`> make build`
-
-The server for the python app is running on port `5000`. This is configurable from the `.env` file.
-
-
-
-## Implementation Status
-
-The service uses `REST` for asynchronous communication, and we will use `Kafka` in the future to implement a scalable and highly-available architecture.
-
-Will suggest using postman to test-run the api's.
-
-## Testing
-
-Basic jest test cases have been implemented for the gateway. 
+Run the docker container using the provided `docker-compose` file:
 
 `> cd gateway`
 <br> </br>
-`> npm run test`
+`> docker-compose up`
+
+The server for the python app is running on port `1000`.
+
+
+
 
 
 
