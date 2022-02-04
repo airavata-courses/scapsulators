@@ -27,11 +27,7 @@ Spring 2022 Project
   <li> <code>SAMPLE REQUEST-BODY: {"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}</code> </li>
   <li> Response : ByteArray[] Gif Image
 
-
-<li>The <i><b>"visualize"</i></b> parameter can also take on <i>velocity</i>, or <i>spectrum_width</i> values. Some insight into these parameters is <a href="https://github.com/airavata-courses/scapsulators/wiki/Weather-enthusiasts-assemble"> here.</a>
-</li>
-<li>The response will be the aforementioned GIF image for visualizing the weather-report for a specific radar-station at that point in time.</li>
-</ul>
+<br> </br>
 
 ## Installation 
 
