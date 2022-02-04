@@ -2,7 +2,7 @@
 Spring 2022 Project
 
 
-# Gateway Service
+# FrontEnd
 
 ## Functionality/Motivation
 
@@ -30,6 +30,7 @@ Spring 2022 Project
 ### Software Requirements
 
 * Docker 20.10.11
+* Works best with browsers edge and firefox
 
 ### Hosting the frontend.
 
