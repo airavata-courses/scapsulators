@@ -1,31 +1,81 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 // import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css'
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { TableData } from '../data/TableData';
+
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import BootstrapTable from 'react-bootstrap-table-next';
 import '../Homepage.css'
+import axios from 'axios';
+import { getData} from '../api/image';
+import { useAuth } from "../context/GlobalContext";
 
 
-function Audittable({showModal, openModal}) {
-  const columns = [{dataField: "id", text: "#"}, {dataField: "firstname", text: "First Name"}, {dataField: "lastname", text: "Last Name"}
-  , {dataField: "username", text: "Username"}, {dataField: "laststation", text: "Station"}]
+function Audittable({showModal, openModal, setLoading, setData}) {
+  const [tdata, setTdata] = useState([]);
+  const { state } = useAuth();
+
+  var data = JSON.stringify({"username":"shubhpatra"});
+
+var config = {
+  method: 'post',
+  url: 'http://localhost:5000/api/getaudit',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data: data
+};
+
+  
+  useEffect(async () => {
+    axios(config)
+.then(function (response) {
+
+  if(response.data.status === 200) {
+    
+    setTdata(response.data.data);
+
+  }
+}).catch(function (error) {
+    console.log(error);
+});
+    
+  }, []);
+  
+
+  const columns = [{dataField: "index", text: "#"}, {dataField: "date", text: "Date Time"}, {dataField: "nexradStation", text: "NexRad Station"}, {dataField: "Visualization", text: "Visualization"}, {dataField: "Link", text: "link"} ]
  
  
     const tableRowEvents = {
-     onClick: (e, row, rowIndex) => {
-       console.log(`clicked on row with index: ${rowIndex}`);
-       openModal();
+      
+      onClick: async (e, row, rowIndex) => {
+        openModal();
+        const body = {visualize: row.Visualization , station: row.nexradStation , timestamp: row.date}
+
+        console.log(body);
+        var result = await getData(body, state.user);
+
+    if (result.success === true) {
+      setLoading(false);
+      setData(result.data);
+    } 
+
+    else{
+      alert('Querry Failed!');
+      openModal();
+    }
+       
+       
      }
   }
    
 
 
+
   return (
       <div style={table}>
           <p style={text}>Previous Data</p>
-      <BootstrapTable hover keyField="id" data={TableData}  columns={columns} rowEvents={ tableRowEvents } pagination={paginationFactory({sizePerPage:5})}/>
+      <BootstrapTable hover keyField="id" data={tdata}  columns={columns} rowEvents={ tableRowEvents } pagination={paginationFactory({sizePerPage:5})}/>
       </div>
  );
 }

@@ -14,7 +14,7 @@ import { radardata } from "../data/radars";
 import DateTimePicker from 'react-datetime-picker';
 import { dateconv } from '../helpers/date';
 import { getData} from '../api/image';
-
+import { useAuth } from "../context/GlobalContext";
 
 const weatherType = ['reflectivity', 'velocity', 'spectrum_width']
 
@@ -41,6 +41,7 @@ function BigCard({setBody, openModal, body, setLoading, setData}){
   
 	const [dist, setDist] = useState([]);
   const [dvalue, onDChange] = useState(new Date());
+  const { state } = useAuth();
 
   function handleData({ target }) {
 		setBody((prev) => ({ ...prev, [target.name]: target.value }));
@@ -51,12 +52,10 @@ function BigCard({setBody, openModal, body, setLoading, setData}){
     e.preventDefault();
     openModal();
 
-    console.log('Finding')
-    var result = await getData(body);
+    var result = await getData(body, state.user);
     if (result.success === true) {
       setLoading(false);
       setData(result.data);
-      console.log('found');
     } 
 
     else{
@@ -71,7 +70,6 @@ function BigCard({setBody, openModal, body, setLoading, setData}){
 
 	}, [dvalue]);
 
-  
 	useEffect(() => {
 		if (body.state) {
 			setDist(radardata[body.state]);
@@ -173,6 +171,10 @@ export default function HomePage() {
     const [body, setBody] = useState({});
     const [data,setData] = useState("");
     const [loading, setLoading] = useState(true);
+   
+    
+    
+
 
     const openModal = () => {
       setShowModal(prev => !prev);
@@ -189,7 +191,7 @@ export default function HomePage() {
             <Ecard />
             </div>
             <div style={{display:"flex"}}>
-            <Audittable showModal={showModal} openModal={openModal} />
+            <Audittable showModal={showModal} openModal={openModal} setLoading={setLoading} setData={setData}/>
             <BigCard  setData={setData} setBody={setBody} body={body} setLoading={setLoading} openModal={openModal}  /></div>
         </div>
     )
