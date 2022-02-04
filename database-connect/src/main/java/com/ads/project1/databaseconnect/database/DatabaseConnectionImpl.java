@@ -91,7 +91,7 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
    			User user = new User();
             user = userDetailsRepo.findItemByUsername(username);
             logger.info("Authenticating user Complete : " + username);
-            return new OutputBody(Constants.SUCCESS, Constants.status_200);
+            return new OutputBody(user.getPassword(), Constants.status_200);
    		}catch(Exception e) {
    			logger.info("ERROR while authenticating the user : " + username);
    			e.printStackTrace();
