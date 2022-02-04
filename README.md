@@ -35,40 +35,50 @@ Spring 2022 Project
 
 ## Installation 
 
+### Prerequisites
+Before you start testing the gateway, we need to make sure all the other microservices are up and running. Also, please make sure all dockers are in the same network, this can be done by checking the <b> docker-compose.yml </b> file.
+
+Second prerequisite is the .env file in the gateway directory, this contains all the secret information, ideally this not uploaded in git. But for an easier submission we have included it, make sure all the docker names are correct for the respective microservice. 
+
+If you're using current branch, make sure to build the Java Microservice as it creates all the docker networks. All this will be mitigated in the master branch.
+
 ### Software Requirements
 
 * Docker 20.10.11
 
 ### Firing up the microservice
 
-Run the docker container using the provided `.bat` file:
+Run the docker container using the provided `make` file:
 
-`> start-app.bat`
+`> cd gateway`
+`> make build`
 
-The server for the python app is running on port `5006`. This is configurable from the `config.env` file.
+The server for the python app is running on port `5000`. This is configurable from the `.env` file.
 
-### Note:
-Building the Docker image takes time ($\approx$20 minutes)- the Python dependencies of scientific libraries (PyArt, metpy, etc.) are quite heavy.
 
 
 ## Implementation Status
 
 The service uses `REST` for asynchronous communication, and we will use `Kafka` in the future to implement a scalable and highly-available architecture.
 
-`Weather_Reporter` class in `weather_reporter.py` is used to parse the required NEXRAD for S3 data using the `s3.boto` module. There's a good amount of documentation for each function to interpret the underlying data, and subsequently generate the GIF iamge.
+Will suggest using postman to test-run the api's.
 
-`app.py` defines the Flask application functionality: `routes` aren't the focus here.
+## Testing
 
+Basic jest test cases have been implemented for the gateway. 
+
+`> cd gateway`
+`> npm run test`
 
 
 
 ## The team
 
 
-<img src="Documentation/Team-members/Vikrant.jpg" alt="Team member's Image" width="130" ALIGN ="left" style="border-radius:50%;"/><br>
+<img src="https://i.ibb.co/K72RqYw/personal.jpg" alt="Team member's Image" width="130" ALIGN ="left" style="border-radius:50%;"/><br>
 
-- **Vikrant Deshpande**: Vikrant is a first year Master's student studying at Indiana University Bloomington, majoring in Data Science with a focus on Machine Learning and Statistics. He has full time experience as a Data Engineer working with Data pipelining, Analytics, Machine Learning and Software Development. With this course, he intends to gain practical distributed systems skills as well as learn about good open source practices.
+- **Shubham Mohapatra**: Shubham is a DS graduate student at IUB. He's an experienced Software and Cloud Engineer with several years of Experience in the field of Python Programming, Cloud Computing, Full Stack App Development and Machine Learning. When he's not developing stuff, he can be found playing the guitar, scoring a goal in soccer or improving his K/D ratio in Counter Strike.
 
 
-   [<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/vikrant-deshpande/)
-   [<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />](https://github.com/vikrantdeshpande09876/)
+   [<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/shubhammohapatra/)
+   [<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />](https://github.com/shubhpatr/)
