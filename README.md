@@ -17,13 +17,13 @@ Spring 2022 Project
 <li>Gateway runs a Node.js server powered by express.js, it sends json requests, url-encoded requests to the other microservices, there is also a testing version for kafka which is not included in the project 1</li>
 <li>The gateway is divided into three services for now, 1) Authenticate, 2) Audit, and 3) Weather Reporting Gif </li>
   <br> </br>
-  <li> Authenticate :- Login, Register and Update Password</li>
+  <li> <b> Authenticate </b> :- Login, Register and Update Password</li>
   <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://{url}/authenticate?username=shubhpatra </li>
   <br> </br>
-  <li> Audit :- Fetch and Update History log of the user. </li>
+  <li> <b> Audit </b> :- Fetch and Update History log of the user. </li>
   <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://{url}/audit/fetch?username=shubhpatra </li>
   <br> </br>
-  <li> Weather Reporting Gif :- Sends a byte-array of generated gif image </li>
+  <li> <b> Weather Reporting Gif </b>:- Sends a byte-array of generated gif image </li>
   <li> <code>SAMPLE REQUEST-BODY: {"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}</code> </li>
   <li> Response : ByteArray[] Gif Image
 
@@ -51,6 +51,7 @@ If you're using current branch, make sure to build the Java Microservice as it c
 Run the docker container using the provided `make` file:
 
 `> cd gateway`
+<br> </br>
 `> make build`
 
 The server for the python app is running on port `5000`. This is configurable from the `.env` file.
@@ -68,6 +69,7 @@ Will suggest using postman to test-run the api's.
 Basic jest test cases have been implemented for the gateway. 
 
 `> cd gateway`
+<br> </br>
 `> npm run test`
 
 
