@@ -17,9 +17,16 @@ Spring 2022 Project
 <li>Gateway runs a Node.js server powered by express.js, it sends json requests, url-encoded requests to the other microservices, there is also a testing version for kafka which is not included in the project 1</li>
 <li>The gateway is divided into three services for now, 1) Authenticate, 2) Audit, and 3) Weather Reporting Gif </li>
   
-  <li> Authenticate :- </li>
-<code>SAMPLE REQUEST-BODY: {"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}</code>
-</li>
+  <li> Authenticate :- Login, Register and Update Password</li>
+  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://localhost:8081/authenticate?username=shubhpatra </li>
+  
+  <li> Audit :- Fetch and Update History log of the user. </li>
+  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://localhost:8084/audit/fetch?username=shubhpatra </li>
+  
+  <li> Weather Reporting Gif :- Sends a byte-array of generated gif image </li>
+  <li> <code>SAMPLE REQUEST-BODY: {"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}</code> </li>
+  <li> Response : ByteArray[] Gif Image
+
 
 <li>The <i><b>"visualize"</i></b> parameter can also take on <i>velocity</i>, or <i>spectrum_width</i> values. Some insight into these parameters is <a href="https://github.com/airavata-courses/scapsulators/wiki/Weather-enthusiasts-assemble"> here.</a>
 </li>
