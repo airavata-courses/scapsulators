@@ -42,7 +42,7 @@ Run the docker container using the provided `docker-compose` file:
 <br> </br>
 `> docker-compose up`
 
-The server for the python app is running on port `1000`.
+The server for the frontend app is running on port `1000`.
 
 
 
