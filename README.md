@@ -31,7 +31,9 @@ Spring 2022 Project
 
 * Docker 20.10.11
 
-### Firing up the gateway
+### Hosting the frontend.
+
+Make sure to run gateway and complete gateway prerequisites. After that
 
 Run the docker container using the provided `docker-compose` file:
 
