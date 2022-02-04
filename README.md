@@ -42,7 +42,7 @@ If you're using current branch, make sure to build the Java Microservice as it c
 
 * Docker 20.10.11
 
-### Firing up the microservice
+### Firing up the gateway
 
 Run the docker container using the provided `make` file:
 
