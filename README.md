@@ -18,11 +18,11 @@ Spring 2022 Project
 <li>The gateway is divided into three services for now, 1) Authenticate, 2) Audit, and 3) Weather Reporting Gif </li>
   
   <li> Authenticate :- Login, Register and Update Password</li>
-  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://localhost:8081/authenticate?username=shubhpatra </li>
-  
+  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://{url}/authenticate?username=shubhpatra </li>
+  <br> </br>
   <li> Audit :- Fetch and Update History log of the user. </li>
-  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://localhost:8084/audit/fetch?username=shubhpatra </li>
-  
+  <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://{url}/audit/fetch?username=shubhpatra </li>
+  <br> </br>
   <li> Weather Reporting Gif :- Sends a byte-array of generated gif image </li>
   <li> <code>SAMPLE REQUEST-BODY: {"visualize":"reflectivity", "station":"KVNX", "timestamp":"2018-12-25 09:27:53"}</code> </li>
   <li> Response : ByteArray[] Gif Image
