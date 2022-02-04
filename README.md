@@ -15,8 +15,12 @@ Spring 2022 Project
 # Installation :
 * Software Required : Docker - 20.10.12 (You can get docker from https://docs.docker.com/get-docker/)
 * To start the microservice : 
-* Step 1 - Built the services : audit/build_auditService.sh, autehntication/build-authenticationService.sh, dbconnection/build-dbService.sh
-* Step 2 - Start all java based microservices - start-allServices.sh
+* Step 1 - Go to the folder that contains the pom.xml file and open command prompt.
+* Step 2 - Set JAVA_HOME = <Path to JDK folder>
+*        - Set PATH = <JAVA_HOME/bin>
+* Step 3 - Type Command - mvnw clean package
+* Step 4 - Build the services : audit/build_auditService.sh, autehntication/build-authenticationService.sh, dbconnection/build-dbService.sh - (This will vreate a docker image).
+* Step 5 - Start all java based microservices - start-allServices.sh
 * The audit microservice runs on port - 8084
 
 * To run the test cases - 
