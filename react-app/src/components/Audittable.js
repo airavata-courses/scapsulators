@@ -15,7 +15,7 @@ function Audittable({showModal, openModal, setLoading, setData}) {
   const [tdata, setTdata] = useState([]);
   const { state } = useAuth();
 
-  var data = JSON.stringify({"username":"shubhpatra"});
+  var data = JSON.stringify({"username":state.user});
 
 var config = {
   method: 'post',
