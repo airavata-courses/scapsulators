@@ -1,10 +1,10 @@
-
+require('dotenv').config(); 
 const axios = require("axios");
 var querystring = require('querystring');
 const {generateHash, compareHash} = require('../helpers/encrypt');
 
-//const authUrl = "http://authentication-micro:8081/"
-const authUrl = "http://localhost:8081/"
+const authUrl = process.env.AUTH_URL;
+//const authUrl = "http://localhost:8081/"
 
 module.exports = {
 

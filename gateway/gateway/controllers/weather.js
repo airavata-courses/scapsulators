@@ -1,15 +1,23 @@
 const axios = require("axios");
+require('dotenv').config()
 
-const weathUrl = "http://localhost:5001/"
+const {
+    writeAudit
+  } = require("../controllers/audit");
+
+//const weathUrl = "http://localhost:5001/"
+const weathUrl = process.env.PYTHON_URL
 
 module.exports = {
 
     getImg: async (req, res, next) => {
         try{
             
-            
-            var data = JSON.stringify(req.body);
+            const usr = req.body.username;
+            delete req.body.username;
             console.log(req.body);
+            var data = JSON.stringify(req.body);
+            
             var config = {
             method: 'get',
             url: weathUrl + 'getWeatherReport',
@@ -22,8 +30,8 @@ module.exports = {
 
             axios(config)
             .then(function (response) {
-                
-                
+                const data = { username: usr, date: req.body.timestamp, time: req.body.visualize , nexradstation: req.body.station}
+                writeAudit(data);
                 res.send(response.data.toString('base64'));
 
             })
