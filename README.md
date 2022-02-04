@@ -16,7 +16,7 @@ Spring 2022 Project
 <ul>
 <li>Gateway runs a Node.js server powered by express.js, it sends json requests, url-encoded requests to the other microservices, there is also a testing version for kafka which is not included in the project 1</li>
 <li>The gateway is divided into three services for now, 1) Authenticate, 2) Audit, and 3) Weather Reporting Gif </li>
-  
+  <br> </br>
   <li> Authenticate :- Login, Register and Update Password</li>
   <li> Each request is url-parsed, i.e all parameters will be parsed in the url, for example http://{url}/authenticate?username=shubhpatra </li>
   <br> </br>
