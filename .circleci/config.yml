@@ -14,7 +14,7 @@ jobs: # a collection of steps
         
       - run:
           name: Login to DockerHub
-          command: docker login -u scapsulators -p Scapsulators2022
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
    
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/

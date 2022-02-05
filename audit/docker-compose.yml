@@ -9,7 +9,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
   
   audit:
-    image: 'audit:latest'
+    image: 'scapsulators/audit-service:0.0.1'
     ports:
       - '8084:8084'
     environment:
