@@ -1,0 +1,17 @@
+version: '2'
+services:
+ radar-stations-fetcher:
+    build: .
+    ports:
+      - "5005:5005"
+    hostname: radar-stations-fetcher
+    container_name: radar-stations-fetcher
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 4g
+
+networks:
+  default:
+      name: flask
