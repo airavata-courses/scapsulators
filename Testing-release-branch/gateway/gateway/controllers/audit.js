@@ -3,6 +3,7 @@ require('dotenv').config();
 //const audUrl = "http://localhost:8084/"
 const audUrl = process.env.AUDIT_URL;
 
+console.log(audUrl);
 module.exports = {
 
     getAudit: async (req, res, next) => {

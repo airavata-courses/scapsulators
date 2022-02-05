@@ -1,6 +1,6 @@
 cd audit
 call mvnw clean package
-cd ..\authentication
+cd ..\authentication\authentication
 call mvnw clean package
 cd ..\database-connect
 call mvnw clean package

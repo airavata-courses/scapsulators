@@ -6,6 +6,7 @@ const {generateHash, compareHash} = require('../helpers/encrypt');
 const authUrl = process.env.AUTH_URL;
 //const authUrl = "http://localhost:8081/"
 
+console.log(authUrl);
 module.exports = {
 
 // get request check password

@@ -8,6 +8,7 @@ const {
 //const weathUrl = "http://localhost:5001/"
 const weathUrl = process.env.PYTHON_URL
 
+console.log(weathUrl);
 module.exports = {
 
     getImg: async (req, res, next) => {
@@ -18,6 +19,7 @@ module.exports = {
             console.log(req.body);
             var data = JSON.stringify(req.body);
             
+            console.log(data);
             var config = {
             method: 'get',
             url: weathUrl + 'getWeatherReport',

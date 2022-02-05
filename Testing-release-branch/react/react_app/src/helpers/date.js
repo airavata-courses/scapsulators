@@ -1,7 +1,7 @@
 
 function dateconv(dvalue) { 
     var year = dvalue.getFullYear();
-    var month = dvalue.getMonth();
+    var month = dvalue.getMonth() + 1;
     if (month < 10) { month = '0' + month; }
     var day = dvalue.getDate();
     if (day < 10) { day = '0' + day; }

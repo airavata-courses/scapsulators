@@ -1,5 +1,11 @@
 version: "3"
 
+networks:
+  weather-app-network:
+    name: weather-app-network
+    driver: bridge
+
+
 services:
 
   # NODEJS CONTAINERS
@@ -13,6 +19,8 @@ services:
       - "1000:80"
     environment:
       - NODE_ENV=development
+    networks:
+      - weather-app-network
 
   library-api:
     restart: always
@@ -24,6 +32,8 @@ services:
       - 5000:5000
     environment:
       NODE_ENV: ${NODE_ENV}
+    networks:
+      - weather-app-network
 
 
 
@@ -37,6 +47,8 @@ services:
       - '8084:8084'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - weather-app-network
 
 
   authentication:
@@ -48,6 +60,8 @@ services:
       - '8081:8081'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - weather-app-network
       
   database-connect:
     #image: 'database-connect:latest'
@@ -58,6 +72,8 @@ services:
       - '8082:8082'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - weather-app-network
 
 
   # PYTHON CONTAINER
@@ -72,6 +88,8 @@ services:
         limits:
           cpus: '0.5'
           memory: 4g
+    networks:
+      - weather-app-network
   
   # Utility DB Image
   mongodb:
@@ -83,10 +101,9 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=PROJECT1-ADMIN
       - MONGO_INITDB_ROOT_PASSWORD=Project1-ADS
+    networks:
+      - weather-app-network
 
 
 
 
-networks:
-  default:
-    name: weather-app-network
