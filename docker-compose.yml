@@ -1,0 +1,18 @@
+version: '2'
+services:
+ weather-reporter:
+    build: .
+    ports:
+      - "5006:5006"
+    hostname: weather-reporter
+    container_name: weather-reporter
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 4g
+
+networks:
+  default:
+    external: true
+    name: weather-app-network
