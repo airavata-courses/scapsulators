@@ -1,6 +1,8 @@
 # Datasets downloaded locally
 static/data/
+!static/data/README.md
 static/visualizations/
+!static/visualizations/README.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
