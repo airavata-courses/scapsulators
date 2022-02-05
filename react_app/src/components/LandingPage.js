@@ -16,8 +16,8 @@ export default function LandingPage() {
         <source src={BackgroundVideo} type="video/mp4" />
         </video>
             
-            <h1 className="main-title text-center"><span className="main-titlespan">RefleXor</span></h1>
-            <p className="main-para text-center"></p>
+            <h1 className="main-title text-center"><span className="main-titlespan">Weatherpedia</span></h1>
+            <p className="main-para text-center"><span className="main-titlespan">An online weather investigation tool</span></p>
             <div className='container-home'>
             <LoginPage />
             </div>

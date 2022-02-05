@@ -42,7 +42,7 @@ export default function SignUpPage() {
             <div className="center-object">
             <div className='container-block'>
             <h2>Sign Up!</h2>
-            <h5>Create your reflexor account</h5>
+            <h5>Create your account</h5>
             </div>
             <form onSubmit={handleSubmit}>
                 <p>

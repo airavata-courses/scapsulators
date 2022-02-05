@@ -37,7 +37,7 @@ else {
            <Route exact path="/" element={<LandingPage/>}/>
            <Route path="/register" element={<RegisterPage/>} />
            <Route path="/forget-password" element={<ForgetPasswordPage/>} />
-           <Route path="/test" element={<HomePage/>} />
+           {/* <Route path="/test" element={<HomePage/>} /> */}
            <Route  path='*' element={<LandingPage/>}/>
        </Routes>
        <Footer />

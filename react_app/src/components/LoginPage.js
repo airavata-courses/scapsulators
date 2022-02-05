@@ -15,6 +15,11 @@ export default function SignInPage() {
 
     const handleLogin = (event) => {
         event.preventDefault();
+        // if (username=='admin' && password=='admin'){
+        //     login({user: username});
+        //     navigate('/home');
+        //     return;
+        // }
           axios
             .post("http://localhost:5000/api/login", { username: username, password: password })
             .then((res) => {
