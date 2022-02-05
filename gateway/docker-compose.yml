@@ -7,9 +7,6 @@ services:
       context: ./gateway
       dockerfile: Dockerfile.dev
     container_name: gateway_node
-    volumes:
-      - /app/node_modules
-      - ./gateway:/app
     ports:
       - 5000:5000
 
