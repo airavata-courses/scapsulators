@@ -1,0 +1,92 @@
+version: "3"
+
+services:
+
+  # NODEJS CONTAINERS
+  react-frontend:
+    container_name: react-frontend
+    build:
+      context: ./react/react_app
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+      - "1000:80"
+    environment:
+      - NODE_ENV=development
+
+  library-api:
+    restart: always
+    build:
+      context: ./gateway/gateway
+      dockerfile: Dockerfile.dev
+    container_name: gateway_node
+    ports:
+      - 5000:5000
+    environment:
+      NODE_ENV: ${NODE_ENV}
+
+
+
+  # JAVA CONTAINERS
+  audit:
+    #image: 'audit:latest'
+    build: 
+      context: ./audit
+    container_name: audit-micro
+    ports:
+      - '8084:8084'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+
+  authentication:
+    #image: 'authentication:latest'
+    build: 
+      context: ./authentication/authentication
+    container_name: authentication-micro
+    ports:
+      - '8081:8081'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      
+  database-connect:
+    #image: 'database-connect:latest'
+    build:
+      context: ./database-connect
+    container_name: database-connect
+    ports:
+      - '8082:8082'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+
+  # PYTHON CONTAINER
+  weather-reporter:
+    build: ./weather-reporter
+    ports:
+      - "5006:5006"
+    hostname: weather-reporter
+    container_name: weather-reporter
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 4g
+  
+  # Utility DB Image
+  mongodb:
+    image: mongo:5.0
+    hostname: mongodb
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=PROJECT1-ADMIN
+      - MONGO_INITDB_ROOT_PASSWORD=Project1-ADS
+
+
+
+
+networks:
+  default:
+    name: weather-app-network
