@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,10 +37,15 @@ public class DatabaseController {
 	 * Author            - Rutuja Jadhav  
 	 */
 
-	@RequestMapping("/authenticate/{username}/{password}")
-	public OutputBody autheticateUser(@PathVariable("username") String username, @PathVariable("password") String password) {
+	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	public OutputBody autheticateUser(@RequestBody User body) {
+		String username = body.getUsername();
+		String password = body.getPassword();
+	
 		try {
-			logger.info("DatabaseController Microservice : Authenticating user = "+ username);
+				logger.info("DatabaseController Microservice : Authenticating user = "+ username);
+			
+		
 		OutputBody status = dbService.authenticateUser(username, password);
 		logger.info("DatabaseController Microservice : Successfully authenticated the user" );
 		return status ;
@@ -52,6 +58,7 @@ public class DatabaseController {
 	}
 	
 	
+	
 	/*
 	 * Input Parameters  - MultiValueMap
 	 * Output Parameters - OutputBody : message, status 
@@ -59,8 +66,16 @@ public class DatabaseController {
 	 * Author            - Rutuja Jadhav  
 	 */
 
-	@RequestMapping("/signup/{username}/{password}/{firstName}/{lastName}/{city}/{state}/{secQtAns}/{emailAdd}")
-	public OutputBody signup(@PathVariable("username") String username, @PathVariable("password") String password,@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName,  @PathVariable("city") String city, @PathVariable("state") String state, @PathVariable("secQtAns") String secQtAns, @PathVariable("emailAdd") String emailAdd) {
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public OutputBody signup(@RequestBody User body) {
+		String username = body.getUsername();
+		String password = body.getPassword();
+		String firstName = body.getFirstName();
+		String lastName = body.getLastName();
+		String city = body.getCity();
+		String state = body.getState();
+		String secQtAns = body.getSecurtyQtAnswer();
+		String emailAdd = body.getEmailAdd();
 		try {
 			logger.info("DatabaseController Microservice : Signing up user = "+ username);
 			User user = new User(username, password, firstName, lastName, city, state, secQtAns, emailAdd);
@@ -83,8 +98,10 @@ public class DatabaseController {
 	 * Author            - Rutuja Jadhav  
 	 */
 
-	@RequestMapping("/forgotpassword/{username}/{secQtAns}")
-	public OutputBody forgotpassword(@PathVariable("username") String username, @PathVariable("secQtAns") String secQtAns) {
+	@RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
+	public OutputBody forgotpassword(@RequestBody User body) {
+		String username = body.getUsername();
+		String secQtAns = body.getSecurtyQtAnswer();
 		try {
 			logger.info("DatabaseController Microservice :In forgotpassword for user = "+ username);
 		
@@ -107,8 +124,10 @@ public class DatabaseController {
 	 * Author            - Rutuja Jadhav  
 	 */
 
-	@RequestMapping("/updatepassword/{username}/{password}")
-	public OutputBody updatepassword(@PathVariable("username") String username, @PathVariable("password") String password) {
+	@RequestMapping(value = "/updatepassword", method = RequestMethod.POST)
+	public OutputBody updatepassword(@RequestBody User body) {
+		String username = body.getUsername();
+		String password = body.getPassword();
 		try {
 			logger.info("DatabaseController Microservice : Updating the password for user = "+ username);
 		
