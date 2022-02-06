@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ads.project1.authentication.models.OutputBody;
+import com.ads.project1.authentication.models.User;
 
 import reactor.core.publisher.Mono;
 
@@ -36,10 +37,10 @@ public class AuthenticationController {
 	public Mono<OutputBody> autheticateUser(@RequestBody MultiValueMap body) {
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		String password = body.get("password").toString().replaceAll("\\[", "").replaceAll("\\]", "");
-		
+		User user = new User(username, password, null, null, null, null, null, null);
 		try {
 			logger.info("AuthenticationController : Authenticating username = "+username);		
-		Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/authenticate/" + username + "/"+ password).retrieve().bodyToMono(OutputBody.class);
+		Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/authenticate").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 		logger.info("AuthenticationController : Authenticatiopn complete for username = "+username);
 		return status;
 		} catch(Exception e) {
@@ -70,10 +71,12 @@ public class AuthenticationController {
 		
 		String emailAdd = body.get("emailAdd").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		
+		User user = new User(username, password, firstName, lastName, city, state, secQtAns, emailAdd);
+		
 		try {
 			logger.info("AuthenticationController : Signing Up username = "+username);		
 		
-			Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/signup/" + username + "/"+ password + "/" + firstName + "/" + lastName + "/" + city + "/" + state + "/" + secQtAns + "/" + emailAdd).retrieve().bodyToMono(OutputBody.class);
+			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/signup").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 			logger.info("AuthenticationController : Signing Up Complete for username = "+username);		
 			return status;
 		}catch(Exception e) {
@@ -95,10 +98,11 @@ public class AuthenticationController {
 	public Mono<OutputBody> forgotpassword(@RequestBody MultiValueMap body) {
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		String secQtAns = body.get("secQtAns").toString().replaceAll("\\[", "").replaceAll("\\]", "");
+		User user = new User(username, null, null, null, null, null, secQtAns, null);
 		try {
 			logger.info("AuthenticationController : In forgot password for username = "+username);		
 		
-			Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/forgotpassword/" + username + "/"+ secQtAns).retrieve().bodyToMono(OutputBody.class);
+			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/forgotpassword").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 			logger.info("AuthenticationController : Forgot Password Complete for username = "+username);	
 			return status ;
 		}catch(Exception e) {
@@ -121,11 +125,12 @@ public class AuthenticationController {
 		
 		String username = body.get("username").toString().replaceAll("\\[", "").replaceAll("\\]", "");
 		String password = body.get("password").toString().replaceAll("\\[", "").replaceAll("\\]", "");
+		User user = new User(username, password, null, null, null, null, null, null);
 		
 		try {
 			logger.info("AuthenticationController : Updating password for username = "+username);		
 	
-			Mono<OutputBody> status = webClientBuilder.build().get().uri("http://database-connect:8082/database/updatepassword/" + username + "/"+ password).retrieve().bodyToMono(OutputBody.class);
+			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/updatepassword").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 			logger.info("AuthenticationController : Update Password Complete for username = "+username);	
 			return status ;
 		}catch(Exception e){

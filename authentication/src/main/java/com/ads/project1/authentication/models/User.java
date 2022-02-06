@@ -1,84 +1,110 @@
 package com.ads.project1.authentication.models;
 
 
-
 public class User {
-	
-	private String username;
-	
-	private String password;
-	
-	private String city;
-	
-	private String state;
-	
-	private String securtyQtAnswer;
-	
-	private String emailAdd;
+private String username;
 
-	public String getUsername() {
-		return username;
-	}
+private String password;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+private String firstName;
 
-	public String getPassword() {
-		return password;
-	}
+private String lastName;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+public String getFirstName() {
+	return firstName;
+}
 
-	
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
 
-	public String getSecurtyQtAnswer() {
-		return securtyQtAnswer;
-	}
+public String getLastName() {
+	return lastName;
+}
 
-	public void setSecurtyQtAnswer(String securtyQtAnswer) {
-		this.securtyQtAnswer = securtyQtAnswer;
-	}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
 
-	public String getEmailAdd() {
-		return emailAdd;
-	}
+private String city;
 
-	public void setEmailAdd(String emailAdd) {
-		this.emailAdd = emailAdd;
-	}
+private String state;
 
-	public String getCity() {
-		return city;
-	}
+private String securtyQtAnswer;
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+private String emailAdd;
 
-	public String getState() {
-		return state;
-	}
+public String getUsername() {
+	return username;
+}
 
-	public void setState(String state) {
-		this.state = state;
-	}
+public void setUsername(String username) {
+	this.username = username;
+}
 
-	public User(String username, String password, String city, String state, String securtyQtAnswer, String emailAdd) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.city = city;
-		this.state = state;
-		this.securtyQtAnswer = securtyQtAnswer;
-		this.emailAdd = emailAdd;
-	}
+public String getPassword() {
+	return password;
+}
 
-	
-	
-	
-	
+public void setPassword(String password) {
+	this.password = password;
+}
+
+
+
+public String getSecurtyQtAnswer() {
+	return securtyQtAnswer;
+}
+
+public void setSecurtyQtAnswer(String securtyQtAnswer) {
+	this.securtyQtAnswer = securtyQtAnswer;
+}
+
+public String getEmailAdd() {
+	return emailAdd;
+}
+
+public void setEmailAdd(String emailAdd) {
+	this.emailAdd = emailAdd;
+}
+
+public String getCity() {
+	return city;
+}
+
+public void setCity(String city) {
+	this.city = city;
+}
+
+public String getState() {
+	return state;
+}
+
+public void setState(String state) {
+	this.state = state;
+}
+
+
+
+public User(String username, String password, String firstName, String lastName, String city, String state,
+		String securtyQtAnswer, String emailAdd) {
+	super();
+	this.username = username;
+	this.password = password;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.city = city;
+	this.state = state;
+	this.securtyQtAnswer = securtyQtAnswer;
+	this.emailAdd = emailAdd;
+}
+
+public User() {
+}
+
+
+
+
+
 
 }
