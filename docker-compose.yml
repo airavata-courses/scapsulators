@@ -9,9 +9,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: 0.5
+          cpus: '0.5'
           memory: 4g
 
 networks:
   default:
-      name: flask
+    external: true
+    name: weather-app-network

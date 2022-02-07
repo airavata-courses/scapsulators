@@ -1,6 +1,6 @@
 # Datasets downloaded locally
-static/data/
-static/visualizations/
+static/data/*.rar
+static/visualizations/*.gif
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
