@@ -14,24 +14,12 @@ jobs: # a collection of steps
          
       - run: node --version
       
-      - setup_remote_docker
-           # Download and cache dependencies
-      - restore_cache:
-        keys:
-           - react_app-{{ checksum "package.json" }}
-               # fallback to using the latest cache if no exact match is found
-           - react_app-
-    
-          # clearing the cache
+               # clearing the cache
       - run: npm cache clear --force
           # - run: rm package-lock.json
       - run: npm install
-      - save_cache:
-        paths:
-          - node_modules
-        key: react_app-{{ checksum "package.json" }}
-        
-     - run:
+              
+      - run:
             name: Build Success
             when: on_success
             command: |
@@ -40,7 +28,7 @@ jobs: # a collection of steps
               docker build -t <docker_account>/<application_name>:0.0.1 .
               docker push <docker_account>/<application_name>:0.0.1
               echo "Docker build made sucessfully!! for <application_name> $CIRCLE_BRANCH"
-     - run:
+      - run:
             name: Build Failure
             when: on_fail
             command: |
