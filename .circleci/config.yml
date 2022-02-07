@@ -1,0 +1,36 @@
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+
+  build: # runs not using Workflows must have a `build` job as entry point
+
+    working_directory: ~/scapsulators # directory where steps will run
+
+    docker: # run the steps with Docker
+      - image:  continuumio/miniconda3 # ...with this image as the primary container; this is where all `steps` will run
+
+  
+    steps: # a collection of executable commands
+
+          - checkout: # check out source code to working directory
+            path: ~/scapsulators
+            
+          - run:
+              name: Login to DockerHub
+              command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      
+
+          - run: conda env create -f environment.yml 
+
+          - run: echo "source activate env" > ~/.bashrc 
+            
+          - run:
+              name: "Setup custom environment variables"
+              command: echo 'export PATH="/opt/conda/envs/env/bin:$PATH"' >> ~/.bashrc
+
+          - run:
+              name: "Start Server"
+              command: python /weather_reporter/app.py
+
+          - run:
+              command: docker push scapsulators/pythonweather:0.0
+
