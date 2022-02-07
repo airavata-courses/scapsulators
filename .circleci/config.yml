@@ -25,8 +25,8 @@ jobs: # a collection of steps
             command: |
               docker --version
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-              docker build -t <docker_account>/<application_name>:0.0.1 .
-              docker push <docker_account>/<application_name>:0.0.1
+              docker build -t scapsulators/react-app:0.0.1 .
+              docker push scapsulators/react-app:0.0.1
               echo "Docker build made sucessfully!! for <application_name> $CIRCLE_BRANCH"
       - run:
             name: Build Failure
