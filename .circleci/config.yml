@@ -13,6 +13,8 @@ jobs: # a collection of steps
          path: ~/scapsulators
          
       
+      - run:
+            command: apt-get install docker-ce docker-ce-cli containerd.io
       
       - setup_remote_docker:
           version: 19.03.13
