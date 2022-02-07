@@ -11,9 +11,20 @@ jobs: # a collection of steps
   
     steps: # a collection of executable commands
 
+          
+
           - checkout: # check out source code to working directory
               path: ~/scapsulators
-            
+
+          - run:
+              command: apk update
+          
+          - run:
+              command: rc-update add docker boot
+
+          - run:
+              command: service docker start
+
           - run:
               name: Login to DockerHub
               command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
