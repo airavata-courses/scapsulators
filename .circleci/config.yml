@@ -1,47 +1,31 @@
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
-
   build: # runs not using Workflows must have a `build` job as entry point
 
-    working_directory: ~/scapsulators # directory where steps will run
+    working_directory: ~/scapsulators/react_app # directory where steps will run
 
-    docker: # run the steps with Docker
-      - image:  continuumio/miniconda3 # ...with this image as the primary container; this is where all `steps` will run
-
-  
     steps: # a collection of executable commands
 
-          
-
-          - checkout: # check out source code to working directory
-              path: ~/scapsulators
-
-          - run:
-              command: apk update
-          
-          - run:
-              command: rc-update add docker boot
-
-          - run:
-              command: service docker start
-
-          - run:
-              name: Login to DockerHub
-              command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - checkout: # check out source code to working directory
+         path: ~/scapsulators
+         
       
-
-          - run: conda env create -f environment.yml 
-
-          - run: echo "source activate env" > ~/.bashrc 
-            
-          - run:
-              name: "Setup custom environment variables"
-              command: echo 'export PATH="/opt/conda/envs/env/bin:$PATH"' >> ~/.bashrc
-
-          - run:
-              name: "Start Server"
-              command: python /weather_reporter/app.py
-
-          - run:
-              command: docker push scapsulators/pythonweather:0.0
-
+      
+      - setup_remote_docker:
+          version: 19.03.13
+              
+      - run:
+            name: Build Success
+            when: on_success
+            command: |
+              docker --version
+              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+              docker build -t scapsulators/python-app:0.0.1 .
+              docker push scapsulators/python-app:0.0.1
+             
+      - run:
+            name: Build Failure
+            when: on_fail
+            command: |
+              echo "ERROR building <application_name> $CIRCLE_BRANCH"
+        
