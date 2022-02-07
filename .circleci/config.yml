@@ -5,7 +5,7 @@ jobs: # a collection of steps
     working_directory: ~/scapsulators/react_app # directory where steps will run
 
     docker: # run the steps with Docker
-      - image: circleci/node:16-alpine # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/node@16 # ...with this image as the primary container; this is where all `steps` will run
 
     steps: # a collection of executable commands
 
