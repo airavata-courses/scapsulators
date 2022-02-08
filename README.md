@@ -41,6 +41,8 @@ The server for the python app is running on port `5006`. This is configurable fr
 ### Note:
 Building the Docker image takes time ($\approx$20 minutes)- the Python dependencies of scientific libraries (PyArt, metpy, etc.) are quite heavy.
 
+The image is then pushed to Docker-registry after this build. The central release-branch and main-branch will simply download this image and run the container on port `5006`.
+
 
 ## Implementation Status
 
