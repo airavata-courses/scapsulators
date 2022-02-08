@@ -1,6 +1,7 @@
 package com.ads.project1.authentication.models;
 
 
+
 public class User {
 private String username;
 
@@ -101,10 +102,6 @@ public User(String username, String password, String firstName, String lastName,
 
 public User() {
 }
-
-
-
-
 
 
 }
