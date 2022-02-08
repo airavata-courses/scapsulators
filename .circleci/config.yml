@@ -14,10 +14,9 @@ jobs: # a collection of steps
          
       - run: node --version
       
-               # clearing the cache
-      - run: npm cache clear --force
-          # - run: rm package-lock.json
-      - run: npm install
+      
+      - setup_remote_docker:
+          version: 19.03.13
               
       - run:
             name: Build Success
@@ -26,6 +25,7 @@ jobs: # a collection of steps
               docker --version
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
               docker build -t scapsulators/react-app:0.0.1 .
+              docker push scapsulators/react-app:0.0.1
              
       - run:
             name: Build Failure
