@@ -1,5 +1,3 @@
-version: "3"
-
 networks:
   weather-app-network:
     name: weather-app-network
@@ -10,10 +8,8 @@ services:
 
   # NODEJS CONTAINERS
   react-frontend:
+    image: scapsulators/react-app:0.0.1
     container_name: react-frontend
-    build:
-      context: ./react/react_app
-      dockerfile: Dockerfile.dev
     ports:
       - '3000:3000'
       - "1000:80"
@@ -23,10 +19,8 @@ services:
       - weather-app-network
 
   library-api:
+    image: scapsulators/gateway:0.0.1
     restart: always
-    build:
-      context: ./gateway/gateway
-      dockerfile: Dockerfile.dev
     container_name: gateway_node
     ports:
       - 5000:5000
@@ -53,8 +47,6 @@ services:
 
   authentication:
     image: scapsulators/authentication-service:0.0.1
-    #build: 
-    #  context: ./authentication/authentication
     container_name: authentication-micro
     ports:
       - '8081:8081'
@@ -65,8 +57,6 @@ services:
       
   database-connect:
     image: scapsulators/database-connect-service:0.0.1
-    #build:
-    #  context: ./database-connect
     container_name: database-connect
     ports:
       - '8082:8082'
@@ -103,7 +93,3 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=Project1-ADS
     networks:
       - weather-app-network
-
-
-
-
