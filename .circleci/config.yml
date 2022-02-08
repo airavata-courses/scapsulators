@@ -5,29 +5,13 @@ jobs: # a collection of steps
     working_directory: ~/scapsulators # directory where steps will run
 
     docker: # run the steps with Docker
-      - image:  continuumio/miniconda3 # ...with this image as the primary container; this is where all `steps` will run
+      - image:  cimg/base:2021.04 # ...with this image as the primary container; this is where all `steps` will run
 
     steps: # a collection of executable commands
 
       - checkout: # check out source code to working directory
          path: ~/scapsulators
          
-      
-      - run:
-            command: |
-                apt-get update
-                apt-get install \
-                ca-certificates -y \
-                curl \
-                gnupg \
-                lsb-release
-                curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-                echo \
-                "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-                $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-                apt-get update
-                apt-get install docker-ce docker-ce-cli containerd.io -y
-      
       - setup_remote_docker:
           version: 19.03.13
               
