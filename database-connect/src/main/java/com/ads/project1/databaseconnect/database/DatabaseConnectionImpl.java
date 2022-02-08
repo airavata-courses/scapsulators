@@ -23,6 +23,14 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 	
 	@Autowired
 	AuditRepository auditDetailsRepo;
+	
+	
+	/*
+	 * Input Parameters  - MultiValueMap
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To save the user details when he/she is signing up for our application.
+	 * Author            - Rutuja Jadhav  
+	 */
 
 	@Override
 	public OutputBody signUp(User user) {
@@ -67,6 +75,13 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 
        
 
+    /*
+   	 * Input Parameters  - MultiValueMap
+   	 * Output Parameters - OutputBody : message, status 
+   	 * Purpose           - To authenticate the user details when he/she is logging into our application
+   	 * Author            - Rutuja Jadhav  
+   	 */
+
    	@Override
    	public OutputBody authenticateUser(String username, String password) {
    		try {
@@ -76,17 +91,26 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 			}	
    			User user = new User();
             user = userDetailsRepo.findItemByUsername(username);
-            if(user.getPassword().equals(password))
-            	return new OutputBody(Constants.SUCCESS, Constants.status_200);
+
+            logger.info("Authenticating user Complete : " + username);
+            return new OutputBody(user.getPassword(), Constants.status_200);
+
    		}catch(Exception e) {
    			logger.info("ERROR while authenticating the user : " + username);
    			e.printStackTrace();
    			return new OutputBody(Constants.FAIL, Constants.status_404);
    		}
-   		return new OutputBody(Constants.FAILAUTHENTICATION, Constants.status_406);
+
    		
    	}
-
+   	
+   	/*
+	 * Input Parameters  - MultiValueMap
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To check the security question answer to allow the user to change his/her password.
+	 * Author            - Rutuja Jadhav  
+	 */
+  
 	@Override
 	public OutputBody forgotPassword(String username, String secQtAns) {
 		try {
@@ -107,6 +131,16 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 		return new OutputBody(Constants.FAILFORGOTPASSWORD, Constants.status_405);
 	}
 
+
+	
+	
+
+	/*
+	 * Input Parameters  - MultiValueMap
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To update the password.
+	 * Author            - Rutuja Jadhav  
+	 */
 
 	@Override
 	public OutputBody updatepassword(String username, String password) {		
@@ -134,6 +168,15 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 	}
 
 
+	
+	
+	/*
+	 * Input Parameters  - username, date, time, nexradstation
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To save user data for auditory purpose
+	 * Author            - Rutuja Jadhav  
+	 */
+
 	@Override
 	public OutputBody auditsave(Audit audit) {
 		try {
@@ -152,6 +195,14 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 		
 	}
 
+
+	
+	/*
+	 * Input Parameters  - username, date, time, nexradstation
+	 * Output Parameters - OutputBody : message, status 
+	 * Purpose           - To save user data for auditory purpose
+	 * Author            - Rutuja Jadhav  
+	 */
 
 	@Override
 	public OutputBodyAuditFetch auditfetch(String username) {
