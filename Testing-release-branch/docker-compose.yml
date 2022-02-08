@@ -68,7 +68,8 @@ services:
 
   # PYTHON CONTAINER
   weather-reporter:
-    build: ./weather-reporter
+    image: scapsulators/python-app:0.0.1
+    #build: ./weather-reporter
     ports:
       - "5006:5006"
     hostname: weather-reporter
