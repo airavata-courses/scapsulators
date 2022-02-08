@@ -141,7 +141,7 @@ forgot: async (req, res, next) => {
 
             else if (result.data.status == "405") {
                 res.status(200);
-                res.json({message: "Security Answer is incorrect", status: 202});
+                res.json({message: "Security Answer is incorrect", status: 405});
             }
 
             else {
