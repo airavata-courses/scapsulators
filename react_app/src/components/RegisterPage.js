@@ -77,9 +77,9 @@ export default function SignUpPage() {
                     <label>What is your mother's maiden name?</label><br/>
                     <input type="text" name="secQtAns" onChange={handleData} required />
                 </p>
-                <p>
+                {/* <p>
                     <input type="checkbox" name="checkbox" id="checkbox" required /> <span>I agree all statements in <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of service</a></span>.
-                </p>
+                </p> */}
                 <p>
                     <button id="sub_btn" type="submit">Register</button>
                 </p>

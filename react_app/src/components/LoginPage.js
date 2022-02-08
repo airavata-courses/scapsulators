@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useNavigate  } from "react-router-dom";
@@ -13,6 +13,8 @@ export default function SignInPage() {
     const [error, setError] = useState(null);
     const { state, login } = useAuth();
 
+
+    
     const handleLogin = (event) => {
         event.preventDefault();
         // if (username=='admin' && password=='admin'){
@@ -39,7 +41,7 @@ export default function SignInPage() {
             });
       };
 
-
+      
     return (
         <div className="text-center m-5-auto">
             <h2>Sign In</h2>
@@ -60,7 +62,7 @@ export default function SignInPage() {
             </form>
             <footer>
                 <p>First time? <Link to="/register">Create an account</Link>.</p>
-                <p><Link to="/">Back to Homepage</Link>.</p>
+                {/* <p><Link to="/">Back to Homepage</Link>.</p> */}
             </footer>
         </div>
     )

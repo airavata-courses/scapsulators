@@ -56,7 +56,7 @@ function BigCard({setBody, openModal, body, setLoading, setData}){
     } 
 
     else{
-      alert('Query Failed!');
+      alert('Querry Failed! No data found, try some other date');
       openModal();
     }
   }
@@ -81,7 +81,7 @@ function BigCard({setBody, openModal, body, setLoading, setData}){
       <div style={{display:'flex', textAlign:'center'}}>
 
       <Form.Group controlId="formGridState">
-							<Form.Label className="label">State :</Form.Label>
+							<Form.Label className="label">Region :</Form.Label>
 							<Form.Control
 								className="input"
 								name="state"

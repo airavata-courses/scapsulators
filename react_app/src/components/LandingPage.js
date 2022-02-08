@@ -1,14 +1,29 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 
 import '../App.css'
 import BackgroundImage from '../assets/img-home.jpg'
 import BackgroundVideo from '../assets/video-2.mp4'
 import LoginPage from './LoginPage'
+import axios from 'axios'
 
 
 export default function LandingPage() {
 
+    React.useEffect(() => {
+        (async () => {
+          try {
+            const result = await axios.get(
+                BackgroundVideo,
+              { timeout: 5000}
+            );
+            alert('Please adjust your zoom to 75% for best user experience')
+          } catch (e) {
+            console.log("The link is not avaible", e.message);
+            // Do something here
+          }
+        })();
+      }, []);
     return (
         <header style={HeaderStyle} >
             

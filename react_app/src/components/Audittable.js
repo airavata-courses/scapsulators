@@ -61,7 +61,7 @@ var config = {
     } 
 
     else{
-      alert('Querry Failed!');
+      alert('Querry Failed! No data found, try some other date');
       openModal();
     }
        

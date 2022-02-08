@@ -74,7 +74,7 @@ export default function ForgetPasswordPage() {
             <div className="center-object">
             <div className='container-block'>
             <h2>Reset your password</h2>
-            <h5>Enter your email address and we will send you a new password</h5>
+            <h5>Enter your email address and security answer</h5>
             </div>
             <form onSubmit={handleSubmit}>
                 <p>
