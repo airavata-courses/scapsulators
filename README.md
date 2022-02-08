@@ -31,7 +31,7 @@ Navigate to [localhost:1000](http://localhost:1000) and explore!
 
 The services use `REST` for synchronous communication.
 
-View our [current architecture](https://github.com/airavata-courses/scapsulators/wiki/Architecture-and-Documentation), the [user-lifecycle diagram](https://github.com/airavata-courses/scapsulators/wiki/Flow-Diagram-for-user-lifecycle) and a sample [napkin diagram](https://github.com/airavata-courses/scapsulators/wiki/Flow-Diagram-for-user-lifecycle) in the [Wikis](https://github.com/airavata-courses/scapsulators/wiki) for this repository.
+View our [current architecture](https://github.com/airavata-courses/scapsulators/wiki/Architecture-and-Documentation), the [user-lifecycle diagram](https://github.com/airavata-courses/scapsulators/wiki/Flow-Diagram-for-user-lifecycle) and a sample [napkin diagram](https://github.com/airavata-courses/scapsulators/wiki/Napkin-Diagram) in the [Wikis](https://github.com/airavata-courses/scapsulators/wiki) for this repository.
 
 We intend to use a containerized `Kafka` streaming-service to implement a scalable and highly-available architecture, in the future.
 
