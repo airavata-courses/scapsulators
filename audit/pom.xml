@@ -50,6 +50,7 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>2.5.0</version>
             </plugin>
+
 		</plugins>
 	</build>
 

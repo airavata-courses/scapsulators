@@ -31,51 +31,23 @@ public class AuditController {
 	@Autowired
 	private WebClient.Builder webClientBuilder;
 	
-	/*
-	 * Input Parameters  - username, date, time, nexradstation
-	 * Output Parameters - OutputBody : message, status 
-	 * Purpose           - To save user data for auditory purpose
-	 * Author            - Rutuja Jadhav  
-	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Mono<OutputBody> auditSave (@RequestParam("username") String username, @RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("nexradstation") String nexradstation) {
-		
-		try {
-			logger.info("AuditController Microservice : Saving data = "+ username+ " "+ date+ " "+ time+  "  "+ nexradstation);
-			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/auditsave?username="+username+"&date="+date+"&time="+time+"&nexradstation="+nexradstation).retrieve().bodyToMono(OutputBody.class);
-			logger.info("AuditController Microservice : Successfully saved the audit data" );			
-			return status;
-		}catch(Exception e) {
-			logger.info("AuditController Microservice : Error in saving the audit data" );	
-			e.printStackTrace();		
-			OutputBody error = new OutputBody("Internal Service Error", "404");
-			return Mono.just(error);
-		}		
-		
+	public Mono<OutputBody> signup (@RequestParam("username") String username, @RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("nexradstation") String nexradstation) {
+		logger.info("DATA RECEIVED IN AUDIT = "+ username+ " "+ date+ " "+ time+  "  "+ nexradstation);
+		Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/auditsave?username="+username+"&date="+date+"&time="+time+"&nexradstation="+nexradstation).retrieve().bodyToMono(OutputBody.class);
+		//Mono<String> status = webClientBuilder.build().post().uri("http://database-connect/database/auditsave?username="+username+"&date="+date+"&time="+time+"&nexradstation="+nexradstation).retrieve().bodyToMono(String.class);
+			
+		return status;
 	}
 	
-	
-	/*
-	 * Input Parameters  - username
-	 * Output Parameters - OutputBodyAuditFetch : message, status, auditDetails
-	 * Purpose           - To fetch user's audit data
-	 * Author            - Rutuja Jadhav  
-	 */
 	@RequestMapping(value = "/fetch", method = RequestMethod.GET)
-	public Mono<OutputBodyAuditFetch> auditFetch (@RequestParam("username") String username) {
-		try {
-			logger.info("AuditController Microservice : Fetching audit data for username = "+ username);
+	public Mono<OutputBodyAuditFetch> signup (@RequestParam("username") String username) {
 		
-			Mono<OutputBodyAuditFetch> auditDetails = webClientBuilder.build().get().uri("http://database-connect:8082/database/auditfetch/" + username).retrieve().bodyToMono(OutputBodyAuditFetch.class);
-			return auditDetails; 	
-		}catch(Exception e) {
-			logger.info("AuditController Microservice : Error in saving the audit data" );	
-			e.printStackTrace();		
-			OutputBodyAuditFetch error = new OutputBodyAuditFetch("Internal Service Error", "404", null);
-			return Mono.just(error);
-			}
-		}
+		Mono<OutputBodyAuditFetch> auditDetails = webClientBuilder.build().get().uri("http://database-connect:8082/database/auditfetch/" + username).retrieve().bodyToMono(OutputBodyAuditFetch.class);
+		return auditDetails; 
 		
-	
+		
+	}
+
 
 }
