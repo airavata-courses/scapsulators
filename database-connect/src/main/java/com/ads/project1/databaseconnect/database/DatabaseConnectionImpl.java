@@ -74,6 +74,7 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
      
 
        
+
     /*
    	 * Input Parameters  - MultiValueMap
    	 * Output Parameters - OutputBody : message, status 
@@ -90,13 +91,16 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 			}	
    			User user = new User();
             user = userDetailsRepo.findItemByUsername(username);
+
             logger.info("Authenticating user Complete : " + username);
             return new OutputBody(user.getPassword(), Constants.status_200);
+
    		}catch(Exception e) {
    			logger.info("ERROR while authenticating the user : " + username);
    			e.printStackTrace();
    			return new OutputBody(Constants.FAIL, Constants.status_404);
    		}
+
    		
    	}
    	
@@ -106,8 +110,7 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 	 * Purpose           - To check the security question answer to allow the user to change his/her password.
 	 * Author            - Rutuja Jadhav  
 	 */
-
-   	
+  
 	@Override
 	public OutputBody forgotPassword(String username, String secQtAns) {
 		try {
@@ -127,6 +130,7 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 		
 		return new OutputBody(Constants.FAILFORGOTPASSWORD, Constants.status_405);
 	}
+
 
 	
 	
@@ -163,6 +167,7 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 		   
 	}
 
+
 	
 	
 	/*
@@ -189,6 +194,7 @@ public class DatabaseConnectionImpl implements DatabaseConnection{
 		}		
 		
 	}
+
 
 	
 	/*
