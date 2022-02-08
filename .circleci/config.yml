@@ -15,6 +15,7 @@ jobs: # a collection of steps
       
       - run:
             command: |
+                apt-get update
                 apt-get install \
                 ca-certificates \
                 curl \
