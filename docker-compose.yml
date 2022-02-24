@@ -1,6 +1,12 @@
 version: '2'
 services:
  weather-reporter:
+    env_file:
+      - weather-reporter-config.env
+    environment:
+      - FLASK_HOST=${FLASK_HOST}
+      - FLASK_PORT=${FLASK_PORT}
+      - DEBUG=${DEBUG}
     build: .
     ports:
       - "5006:5006"

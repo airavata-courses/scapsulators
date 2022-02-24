@@ -80,7 +80,7 @@ class Weather_Reporter:
                 self.DAY = str(int(self.DAY)-1).zfill(2)
                 print(f'\n\nNo potential objects found.. Reducing day by 1 and checking again for DAY={self.DAY} , prefix={self.my_prefix}..')
             elif self.DAY=='00' and self.HOUR=='00':
-                raise KeyError(f'No S3 object found for this station {self.STATION}!')
+                return KeyError(f'No S3 object found for this station {self.STATION}!')
             self.set_search_prefix()
             return self.get_s3_object(verbose)
 
@@ -141,6 +141,9 @@ class Weather_Reporter:
             [PyArt-object]: Dataset of radar measurements and metadata for corresponding query.
         """
         desired_s3_object = self.get_s3_object(verbose=True)
+        if isinstance(desired_s3_object, KeyError):
+            return desired_s3_object
+
         folder_path = os.path.join(download_data_dir, 'data', self.STATION)
         
         _ = self.create_path_if_not_exist(folder_path)
@@ -186,7 +189,7 @@ class Weather_Reporter:
         range_min = dataset_for_sweep.min()
         range_max = dataset_for_sweep.max()
         res = []
-        my_figure = plt.figure(figsize = [10,8])
+        _ = plt.figure(figsize = [10,8])
         my_display = pyart.graph.RadarMapDisplay(radar)
 
         for sweep_i in range(0,100,sweep_intervals):
@@ -210,28 +213,32 @@ class Weather_Reporter:
     
     def generate_animation(self, download_data_dir):
         """Runs the entire pipeline for weather-report generation:
-        Downloads the s3-dataset, creates local directory for generating final GIF image. Removes the folder used for temporary image generation.
+        Checks if queried file already exists as a GIF image locally (Cache-hit).
+        Otherwise downloads the s3-dataset, creates local directory for generating final GIF image. Removes the folder used for temporary image generation.
         Sets an attribute for absolute-path for accessing the required GIF image.
 
         Args:
             download_data_dir ([str]): Path where to download data: Ideally the /static/ folder within running application.
         """
-
-        radar = self.download_s3_object(download_data_dir)
         TGT_FOLDER = os.path.join(download_data_dir,'visualizations',self.STATION)
         _ = self.create_path_if_not_exist(TGT_FOLDER)
 
         RAW_FOLDER = os.path.join(TGT_FOLDER, 'raw')
         _ = self.create_path_if_not_exist(RAW_FOLDER)
-
+        
+        self.gif_abs_path = os.path.join(TGT_FOLDER, ''.join([self.STATION, self.FEATURE_TO_VISUALIZE, self.YEAR, self.MONTH, self.MINUTE]))+'.gif'
+        if os.path.exists(self.gif_abs_path):
+            return
+            
+        radar = self.download_s3_object(download_data_dir)
+        if isinstance(radar, KeyError):
+            self.gif_abs_path = KeyError('S3 Object matching input params not found!')
+            return
 
         images_for_animation = self.generate_images_for_animation_by_sweep(radar, self.STATION, RAW_FOLDER, 3)
         imgs = [imageio.imread(img) for img in images_for_animation]
-        abs_gif_path = os.path.join(TGT_FOLDER, ''.join([self.STATION, self.YEAR, self.MONTH, self.MINUTE]))+'.gif'
-        imageio.mimwrite(abs_gif_path, imgs, fps=3)
+        imageio.mimwrite(self.gif_abs_path, imgs, fps=3)
         shutil.rmtree(RAW_FOLDER)
-
-        self.gif_abs_path = abs_gif_path
 
 
 
@@ -244,7 +251,7 @@ class Weather_Reporter:
         Returns:
             [bytes]: Bytestream from GIF image.
         """
-        print('Converting the GIF image to bytes...')
+        print(f'Converting the GIF image to bytes... {self.gif_abs_path} here!')
         img = Image.open(self.gif_abs_path)
         img.seek(0)
         buffer = io.BytesIO()
