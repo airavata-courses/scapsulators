@@ -15,8 +15,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 4g
+          #cpus: '0.5'
+          memory: 5g
     networks:
       - weather-app-network
 
