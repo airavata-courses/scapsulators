@@ -40,7 +40,7 @@ public class AuthenticationController {
 		User user = new User(username, password, null, null, null, null, null, null);
 		try {
 			logger.info("AuthenticationController : Authenticating username = "+username);		
-		Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/authenticate").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
+		Mono<OutputBody> status = webClientBuilder.build().post().uri("http://localhost:30004/database/authenticate").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 		logger.info("AuthenticationController : Authenticatiopn complete for username = "+username);
 		return status;
 		} catch(Exception e) {
@@ -76,7 +76,7 @@ public class AuthenticationController {
 		try {
 			logger.info("AuthenticationController : Signing Up username = "+username);		
 		
-			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/signup").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
+			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://localhost:30004/database/signup").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 			logger.info("AuthenticationController : Signing Up Complete for username = "+username);		
 			return status;
 		}catch(Exception e) {
@@ -102,7 +102,7 @@ public class AuthenticationController {
 		try {
 			logger.info("AuthenticationController : In forgot password for username = "+username);		
 		
-			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/forgotpassword").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
+			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://localhost:30004/database/forgotpassword").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 			logger.info("AuthenticationController : Forgot Password Complete for username = "+username);	
 			return status ;
 		}catch(Exception e) {
@@ -130,7 +130,7 @@ public class AuthenticationController {
 		try {
 			logger.info("AuthenticationController : Updating password for username = "+username);		
 	
-			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://database-connect:8082/database/updatepassword").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
+			Mono<OutputBody> status = webClientBuilder.build().post().uri("http://localhost:30004/database/updatepassword").body(Mono.just(user), User.class).retrieve().bodyToMono(OutputBody.class);
 			logger.info("AuthenticationController : Update Password Complete for username = "+username);	
 			return status ;
 		}catch(Exception e){
