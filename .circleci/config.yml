@@ -24,8 +24,8 @@ jobs: # a collection of steps
             command: |
               docker --version
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-              docker build -t scapsulators/react-app:0.0.1 .
-              docker push scapsulators/react-app:0.0.1
+              docker build -t scapsulators/react-app:0.0.2 .
+              docker push scapsulators/react-app:0.0.2
              
       - run:
             name: Build Failure
