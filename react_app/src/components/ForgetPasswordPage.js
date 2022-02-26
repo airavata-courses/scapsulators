@@ -18,7 +18,7 @@ export default function ForgetPasswordPage() {
 
     async function handleSubmit(e){
         e.preventDefault();
-        await axios.post("http://localhost:5000/api/forgot", body)
+        await axios.post("http://localhost:30002/api/forgot", body)
             .then((res) => {
 
                 if(res.data.status == 200) {
