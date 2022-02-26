@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 async function getData(body, user) {
-
+      const url = process.env.React_App_gateway_url;
       delete body['state'];
       console.log('sending', body);
       body['username'] = user;
       var config = {
         method: 'post',
-        url: 'http://localhost:5000/api/getimg',
+        url: `http://${url}:5000/api/getimg`,
         headers: { 
           'Content-Type': 'application/json'
         },

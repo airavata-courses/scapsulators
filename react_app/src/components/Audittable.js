@@ -14,12 +14,13 @@ import { useAuth } from "../context/GlobalContext";
 function Audittable({showModal, openModal, setLoading, setData}) {
   const [tdata, setTdata] = useState([]);
   const { state } = useAuth();
+  const url = process.env.React_App_gateway_url;
 
   var data = JSON.stringify({"username":state.user});
 
 var config = {
   method: 'post',
-  url: 'http://localhost:5000/api/getaudit',
+  url: `http://${url}:5000/api/getaudit`,
   headers: { 
     'Content-Type': 'application/json'
   },

@@ -10,6 +10,9 @@ export default function SignUpPage() {
     const [body, setBody] = useState({});
     const navigate = useNavigate();
 
+    const url = process.env.React_App_gateway_url;
+
+
     function handleData({ target }) {
 		setBody((prev) => ({ ...prev, [target.name]: target.value }));
 	}
@@ -17,7 +20,7 @@ export default function SignUpPage() {
     function handleSubmit(e){
         e.preventDefault();
         console.log(body);
-        axios.post("http://localhost:30002/api/register", body)
+        axios.post(`http://${url}:5000/api/register`, body)
             .then((res) => {
                 if(res.data.status == 200) {
                     alert('Registered Succesfully!');

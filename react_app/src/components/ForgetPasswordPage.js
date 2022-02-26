@@ -11,6 +11,7 @@ export default function ForgetPasswordPage() {
     const [body, setBody] = useState({});
     const [resetFlag, setReset] = useState(true);
     const navigate = useNavigate();
+    const url = process.env.React_App_gateway_url;
 
     function handleData({ target }) {
 		setBody((prev) => ({ ...prev, [target.name]: target.value }));
@@ -18,7 +19,7 @@ export default function ForgetPasswordPage() {
 
     async function handleSubmit(e){
         e.preventDefault();
-        await axios.post("http://localhost:30002/api/forgot", body)
+        await axios.post(`http://${url}:5000/api/forgot`, body)
             .then((res) => {
 
                 if(res.data.status == 200) {
@@ -47,7 +48,7 @@ export default function ForgetPasswordPage() {
 
       async function handleSubmit2(e){
         e.preventDefault();
-        await axios.post("http://localhost:5000/api/updatepass", body)
+        await axios.post(`http://${url}:5000/api/updatepass`, body)
             .then((res) => {
 
                 if(res.data.status == 200) {

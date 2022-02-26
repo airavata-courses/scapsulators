@@ -12,9 +12,8 @@ export default function SignInPage() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const { state, login } = useAuth();
+    const url = process.env.React_App_gateway_url;
 
-
-    
     const handleLogin = (event) => {
         event.preventDefault();
         // if (username=='admin' && password=='admin'){
@@ -23,7 +22,7 @@ export default function SignInPage() {
         //     return;
         // }
           axios
-            .post("http://localhost:30002/api/login", { username: username, password: password })
+            .post(`http://${url}:5000/api/login`, { username: username, password: password })
             .then((res) => {
                 
                 if(res.data.status == 200) {
