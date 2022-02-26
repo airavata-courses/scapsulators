@@ -17,7 +17,7 @@ export default function SignUpPage() {
     function handleSubmit(e){
         e.preventDefault();
         console.log(body);
-        axios.post("http://localhost:5000/api/register", body)
+        axios.post("http://localhost:30002/api/register", body)
             .then((res) => {
                 if(res.data.status == 200) {
                     alert('Registered Succesfully!');
