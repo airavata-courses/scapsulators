@@ -16,7 +16,7 @@ services:
       resources:
         limits:
           #cpus: '0.5'
-          memory: 5g
+          memory: 6g
     networks:
       - weather-app-network
 
