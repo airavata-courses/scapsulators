@@ -7,7 +7,7 @@ async function getData(body, user) {
       body['username'] = user;
       var config = {
         method: 'post',
-        url: `http://${url}:5000/api/getimg`,
+        url: `http://${url}/api/getimg`,
         headers: { 
           'Content-Type': 'application/json'
         },

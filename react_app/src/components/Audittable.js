@@ -20,7 +20,7 @@ function Audittable({showModal, openModal, setLoading, setData}) {
 
 var config = {
   method: 'post',
-  url: `http://${url}:5000/api/getaudit`,
+  url: `http://${url}/api/getaudit`,
   headers: { 
     'Content-Type': 'application/json'
   },

@@ -22,7 +22,7 @@ export default function SignInPage() {
         //     return;
         // }
           axios
-            .post(`http://${url}:5000/api/login`, { username: username, password: password })
+            .post(`http://${url}/api/login`, { username: username, password: password })
             .then((res) => {
                 
                 if(res.data.status == 200) {

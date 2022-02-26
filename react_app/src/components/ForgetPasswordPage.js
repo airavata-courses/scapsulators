@@ -19,7 +19,7 @@ export default function ForgetPasswordPage() {
 
     async function handleSubmit(e){
         e.preventDefault();
-        await axios.post(`http://${url}:5000/api/forgot`, body)
+        await axios.post(`http://${url}/api/forgot`, body)
             .then((res) => {
 
                 if(res.data.status == 200) {
@@ -48,7 +48,7 @@ export default function ForgetPasswordPage() {
 
       async function handleSubmit2(e){
         e.preventDefault();
-        await axios.post(`http://${url}:5000/api/updatepass`, body)
+        await axios.post(`http://${url}/api/updatepass`, body)
             .then((res) => {
 
                 if(res.data.status == 200) {
