@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import BackgroundImage from '../assets/earth.jpg'
 import axios from "axios";
 import { useNavigate  } from "react-router-dom";
+import { url } from '../config';
 
 import '../App.css'
 
@@ -11,7 +12,6 @@ export default function ForgetPasswordPage() {
     const [body, setBody] = useState({});
     const [resetFlag, setReset] = useState(true);
     const navigate = useNavigate();
-    const url = process.env.React_App_gateway_url;
 
     function handleData({ target }) {
 		setBody((prev) => ({ ...prev, [target.name]: target.value }));
