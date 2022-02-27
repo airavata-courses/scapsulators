@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-reporter-deployment
+  labels:
+    app: weather-reporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-reporter
+  template:
+    metadata:
+      labels:
+        app: weather-reporter
+    spec:
+      containers:
+      - name: weather-reporter
+        image: scapsulators/python-app:0.0.1
+        ports:
+        - containerPort: 5006
+        env:
+        - name: DEBUG
+          value: "false"
+        - name: FLASK_HOST
+          value: "0.0.0.0"
+        - name: FLASK_PORT
+          value: "5006"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-reporter
+spec:
+  selector:
+    app: weather-reporter
+  ports:
+    - protocol: TCP
+      port: 5006
+      targetPort: 5006
