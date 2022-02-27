@@ -9,12 +9,12 @@ import '../Homepage.css'
 import axios from 'axios';
 import { getData} from '../api/image';
 import { useAuth } from "../context/GlobalContext";
+import { url } from '../config';
 
 
 function Audittable({showModal, openModal, setLoading, setData}) {
   const [tdata, setTdata] = useState([]);
   const { state } = useAuth();
-  const url = process.env.React_App_gateway_url;
 
   var data = JSON.stringify({"username":state.user});
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useNavigate  } from "react-router-dom";
 import { useAuth } from "../context/GlobalContext";
+import { url } from '../config';
 import '../App.css'
 
 export default function SignInPage() {
@@ -12,7 +13,6 @@ export default function SignInPage() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const { state, login } = useAuth();
-    const url = process.env.React_App_gateway_url;
 
     const handleLogin = (event) => {
         event.preventDefault();

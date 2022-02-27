@@ -1,7 +1,7 @@
 import axios from 'axios';
+import { url } from '../config';
 
 async function getData(body, user) {
-      const url = process.env.React_App_gateway_url;
       delete body['state'];
       console.log('sending', body);
       body['username'] = user;

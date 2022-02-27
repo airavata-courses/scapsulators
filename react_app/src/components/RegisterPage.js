@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import BackgroundImage from '../assets/earth.jpg'
 import axios from "axios";
 import { useNavigate  } from "react-router-dom";
-import '../App.css'
+import '../App.css';
+import { url } from '../config';
 
 export default function SignUpPage() {
 
     const [body, setBody] = useState({});
     const navigate = useNavigate();
 
-    const url = process.env.React_App_gateway_url;
 
 
     function handleData({ target }) {
