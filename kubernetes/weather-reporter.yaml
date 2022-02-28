@@ -21,11 +21,20 @@ spec:
         - containerPort: 5006
         env:
         - name: DEBUG
-          value: "false"
+          valueFrom:
+            configMapKeyRef:
+              name: weather-reporter-configmap
+              key: DEBUG
         - name: FLASK_HOST
-          value: "0.0.0.0"
+          valueFrom:
+            configMapKeyRef:
+              name: weather-reporter-configmap
+              key: FLASK_HOST
         - name: FLASK_PORT
-          value: "5006"
+          valueFrom:
+            configMapKeyRef:
+              name: weather-reporter-configmap
+              key: FLASK_PORT
 ---
 apiVersion: v1
 kind: Service
