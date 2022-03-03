@@ -38,7 +38,7 @@ module.exports = {
 
             })
             .catch(function (error) {
-                res.status(500);
+                res.status(200);
                 res.json({ data: error, status: 500});
             });
 
