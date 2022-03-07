@@ -1,0 +1,102 @@
+version: '2'
+
+services:
+  # PYTHON CONTAINER
+  weather-reporter:
+    image: scapsulators/python-app:0.0.1
+    environment:
+      - FLASK_HOST=${FLASK_HOST}
+      - FLASK_PORT=${FLASK_PORT}
+      - DEBUG=${DEBUG}
+    ports:
+      - "5006:5006"
+    hostname: weather-reporter
+    container_name: weather-reporter
+    deploy:
+      resources:
+        limits:
+          #cpus: '0.5'
+          memory: 6g
+    networks:
+      - weather-app-network
+
+  # NODEJS CONTAINERS
+  react-frontend:
+    image: scapsulators/react-app:0.0.1
+    container_name: react-frontend
+    ports:
+      - '3000:3000'
+      - "1000:80"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - weather-app-network
+
+  library-api:
+    image: scapsulators/gateway:0.0.1
+    restart: always
+    container_name: gateway_node
+    ports:
+      - 5000:5000
+    environment:
+      NODE_ENV: ${NODE_ENV}
+    networks:
+      - weather-app-network
+
+
+
+  # JAVA CONTAINERS
+  audit:
+    image: scapsulators/audit-service:0.0.1
+    #build: 
+    #  context: ./audit
+    container_name: audit-micro
+    ports:
+      - '8084:8084'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - weather-app-network
+
+
+  authentication:
+    image: scapsulators/authentication-service:0.0.1
+    container_name: authentication-micro
+    ports:
+      - '8081:8081'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - weather-app-network
+      
+  database-connect:
+    image: scapsulators/database-connect-service:0.0.1
+    container_name: database-connect
+    ports:
+      - '8082:8082'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - weather-app-network
+
+
+
+  
+  # Utility DB Image
+  mongodb:
+    image: mongo:5.0
+    hostname: mongodb
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=PROJECT1-ADMIN
+      - MONGO_INITDB_ROOT_PASSWORD=Project1-ADS
+    networks:
+      - weather-app-network
+
+
+networks:
+  weather-app-network:
+    name: weather-app-network
+    driver: bridge

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.3">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Scapsulators-Gateway-Testing-Plan" enabled="true">
       <stringProp name="TestPlan.comments">Test the gateway using these default config parameters</stringProp>
+=======
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+>>>>>>> project2-release
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+<<<<<<< HEAD
         <collectionProp name="Arguments.arguments">
           <elementProp name="HOSTNAME" elementType="Argument">
             <stringProp name="Argument.name">HOSTNAME</stringProp>
@@ -697,6 +705,29 @@
       </kg.apc.jmeter.threads.UltimateThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Registration-requests" enabled="true">
+=======
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ThreadGroup-gateway" enabled="true">
+        <stringProp name="TestPlan.comments">Thread Group for testing the gateway&apos;s load handling capacity</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP-Gateway-Registration-requests" enabled="true">
+>>>>>>> project2-release
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="username" elementType="HTTPArgument">
@@ -750,18 +781,30 @@
               </elementProp>
               <elementProp name="emailAdd" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
+<<<<<<< HEAD
                 <stringProp name="Argument.value">${__RandomString(${__Random(3,9,)},abcdefghijklmnopqrstuvwxyz,)}@${__RandomString(${__Random(2,3,)},abcdefghijklmnopqrstuvwxyz,)}.${__RandomString(${__Random(2,3,)},abcdefghijklmnopqrstuvwxyz,)}</stringProp>
+=======
+                <stringProp name="Argument.value">&quot;${__RandomString(${__Random(3,9,)},abcdefghijklmnopqrstuvwxyz,)}@${__RandomString(${__Random(2,3,)},abcdefghijklmnopqrstuvwxyz,)}.${__RandomString(${__Random(2,3,)},abcdefghijklmnopqrstuvwxyz,)}&quot;</stringProp>
+>>>>>>> project2-release
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">emailAdd</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
+<<<<<<< HEAD
           <stringProp name="HTTPSampler.domain">${HOSTNAME}</stringProp>
           <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${REGISTRATION_URL_PATH}</stringProp>
+=======
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">api/register</stringProp>
+>>>>>>> project2-release
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
@@ -783,30 +826,50 @@
           </HeaderManager>
           <hashTree/>
         </hashTree>
+<<<<<<< HEAD
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Authentication-requests" enabled="true">
+=======
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP-Gateway-Authentication-requests" enabled="true">
+>>>>>>> project2-release
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="username" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
+<<<<<<< HEAD
                 <stringProp name="Argument.value">${username_${__Random(1,2,)}}</stringProp>
+=======
+                <stringProp name="Argument.value">${username}</stringProp>
+>>>>>>> project2-release
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">username</stringProp>
               </elementProp>
               <elementProp name="password" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
+<<<<<<< HEAD
                 <stringProp name="Argument.value">${password_${__Random(1,2,)}}</stringProp>
+=======
+                <stringProp name="Argument.value">${password}</stringProp>
+>>>>>>> project2-release
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">password</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
+<<<<<<< HEAD
           <stringProp name="HTTPSampler.domain">${HOSTNAME}</stringProp>
           <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${AUTHENTICATION_URL_PATH}</stringProp>
+=======
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">api/login</stringProp>
+>>>>>>> project2-release
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
@@ -820,6 +883,7 @@
         <hashTree>
           <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Authentication-login-creds" enabled="true">
             <collectionProp name="Arguments.arguments">
+<<<<<<< HEAD
               <elementProp name="username_1" elementType="Argument">
                 <stringProp name="Argument.name">username_1</stringProp>
                 <stringProp name="Argument.value">vik</stringProp>
@@ -888,11 +952,14 @@
         <hashTree>
           <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Audit-save-request" enabled="true">
             <collectionProp name="Arguments.arguments">
+=======
+>>>>>>> project2-release
               <elementProp name="username" elementType="Argument">
                 <stringProp name="Argument.name">username</stringProp>
                 <stringProp name="Argument.value">shubh</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
+<<<<<<< HEAD
               <elementProp name="datetime" elementType="Argument">
                 <stringProp name="Argument.name">datetime</stringProp>
                 <stringProp name="Argument.value">${__RandomString(${__Random(3,9,)},abcdefghijklmnopqrstuvwxyz,)}</stringProp>
@@ -910,6 +977,15 @@
               </elementProp>
             </collectionProp>
             <stringProp name="TestPlan.comments">Contains various parameters for testing audit microservice</stringProp>
+=======
+              <elementProp name="password" elementType="Argument">
+                <stringProp name="Argument.name">password</stringProp>
+                <stringProp name="Argument.value">shubham</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+            <stringProp name="TestPlan.comments">Contains various parameters for testing login microservice</stringProp>
+>>>>>>> project2-release
           </Arguments>
           <hashTree/>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -922,6 +998,7 @@
           </HeaderManager>
           <hashTree/>
         </hashTree>
+<<<<<<< HEAD
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Audit-requests" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1038,26 +1115,41 @@
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="WeatherReport-requests" enabled="true">
+=======
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP-Gateway-WeatherReport-requests" enabled="true">
+>>>>>>> project2-release
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
+<<<<<<< HEAD
     &quot;visualize&quot;:&quot;reflectivity&quot;, &#xd;
     &quot;station&quot;:&quot;${stationCode}&quot;, &#xd;
     &quot;timestamp&quot;:&quot;2020-01-01 01:01:11&quot;&#xd;
 &#xd;
+=======
+    &quot;visualize&quot;:&quot;${__V(visualize_${__Random(1,3,)})}&quot;, &quot;station&quot;:&quot;${stationCode}&quot;, &quot;timestamp&quot;:&quot;${__time(yyyy-MM-dd-HH:mm:ss)}&quot;&#xd;
+>>>>>>> project2-release
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
+<<<<<<< HEAD
           <stringProp name="HTTPSampler.domain">${HOSTNAME}</stringProp>
           <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${WEATHER_REPORT_REQ_URL_PATH}</stringProp>
+=======
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">api/getimg</stringProp>
+>>>>>>> project2-release
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1069,6 +1161,7 @@
           <stringProp name="TestPlan.comments">Tests for the Python microservice</stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+<<<<<<< HEAD
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
@@ -1089,11 +1182,17 @@
             <intProp name="Assertion.test_type">33</intProp>
           </ResponseAssertion>
           <hashTree/>
+=======
+>>>>>>> project2-release
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Weather-report-stations" enabled="true">
             <stringProp name="TestPlan.comments">Requests read from CSV source for testing Python-weather-reporter microservice</stringProp>
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding">UTF-8</stringProp>
+<<<<<<< HEAD
             <stringProp name="filename">Station_Names_to_code_mapping.csv</stringProp>
+=======
+            <stringProp name="filename">C:/Users/vikra/OneDrive/Desktop/Station_Names_to_code_mapping.csv</stringProp>
+>>>>>>> project2-release
             <boolProp name="ignoreFirstLine">true</boolProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">true</boolProp>
@@ -1123,6 +1222,18 @@
             <stringProp name="TestPlan.comments">Visualization can take on 3 values</stringProp>
           </Arguments>
           <hashTree/>
+<<<<<<< HEAD
+=======
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+>>>>>>> project2-release
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
@@ -1161,6 +1272,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
+<<<<<<< HEAD
         <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -1246,6 +1358,9 @@
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+=======
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+>>>>>>> project2-release
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
