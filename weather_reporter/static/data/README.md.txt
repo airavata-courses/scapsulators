@@ -1,1 +1,0 @@
-# /data/ will be used as a temporary folder to store files from s3.

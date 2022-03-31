@@ -1,11 +1,11 @@
 version: '2'
 services:
- weather-reporter:
+ satellite-view-reporter:
     build: .
     ports:
-      - "5006:5006"
-    hostname: weather-reporter
-    container_name: weather-reporter
+      - "5016:5016"
+    hostname: satellite-view-reporter
+    container_name: satellite-view-reporter
     deploy:
       resources:
         limits:

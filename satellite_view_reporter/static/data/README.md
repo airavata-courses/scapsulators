@@ -1,0 +1,1 @@
+# /data/ will be used as a temporary folder to store the subset MERRA-data downloaded.

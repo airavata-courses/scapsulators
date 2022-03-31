@@ -1,1 +1,0 @@
-# /visualizations/ will store GIF images generated, temporarily.
