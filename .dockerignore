@@ -1,1 +1,4 @@
 env/
+Documentation/
+docker-kafka-startup/
+__pycache__/

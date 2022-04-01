@@ -50,9 +50,9 @@ def get_satellite_view_data():
 
         
         try:
-            svr.download_merra_subset(download_data_dir=app.config.get('STATIC_DIR'), username=app.config.get('EARTHLOGIN_USERNAME'), password=app.config.get('EARTHLOGIN_PASSWORD'))
+            svr.download_merra_subset(download_data_dir=app.config.get('STATIC_DIR'))
             response.status_code = http.HTTPStatus.OK
-            response.data = 'Created your dataset you piece of shit.'
+            response.data = 'Created your dataset...'
             return response
         except Exception as e:
             print(f'Something went wrong while reading the MERRA subset of data...\n{e}')

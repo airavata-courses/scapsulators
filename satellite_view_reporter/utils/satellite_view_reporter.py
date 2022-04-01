@@ -59,7 +59,7 @@ class Satellite_View_Reporter:
         Returns:
             filename (str): Relative path to write the target file.
         """
-        unique_tgt_filename = os.path.join(target_folder, ''.join([self.COLLECTION_SHORTNAME, self.FEATURE, self.YEAR, self.MONTH, self.DAY]))+'.txt'
+        unique_tgt_filename = os.path.join(target_folder, '_'.join([self.COLLECTION_SHORTNAME, self.FEATURE, self.YEAR, self.MONTH, self.DAY]))+'.txt'
         return unique_tgt_filename
 
 
@@ -102,27 +102,26 @@ class Satellite_View_Reporter:
 
 
 
-    def download_merra_subset(self, download_data_dir, username, password, verbose=True):
+    def download_merra_subset(self, download_data_dir, verbose=True):
         """Retrieves a subset of MERRA data using OPeNDAP.
         Adds 'ascii' between url and request-params.
         Sample URL: 'https://goldsmr4.gesdisc.eosdis.nasa.gov/opendap/MERRA2/M2T1NXOCN.5.12.4/2018/09/MERRA2_400.tavg1_2d_ocn_Nx.20180906.nc4.ascii?LWGNTICE[0:1:23][0:1:360][0:1:575],lat[0:1:360],lon[0:1:575],time[0:1:23]'
         
         Args:
             download_data_dir (str): Parent-folder where to download the dataset.
-            username, password (str): Earthlogin credentials to download the data.
             verbose (bool, optional): Flag to indicate whether to print logs in verbose mode. Defaults to False.
         """
-        TGT_FOLDER = os.path.join(download_data_dir,'data')
+        TGT_FOLDER = os.path.join(download_data_dir)
         _ = self.create_path_if_not_exist(TGT_FOLDER)
-        target_filename = self.set_write_parameters(TGT_FOLDER)
 
         url = self.set_search_parameters()
         url_params = f'{",".join(self.PARAMS_TO_RECEIVE)}'
         if verbose:  print(f'url={url} \nurl_params={url_params}')
 
-        print(username, password, __version__)
-        response = get(url=url, params=url_params, auth=(username, password))
+        target_filename = self.set_write_parameters(TGT_FOLDER)
+        response = get(url=url, params=url_params)
         response.raise_for_status()
         with open(target_filename, 'wb') as f:
             f.write(response.content)
+            if verbose:  print(f'Written file to {target_filename}')
         print('Data Ingestion complete...')

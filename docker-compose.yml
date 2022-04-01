@@ -1,15 +1,21 @@
 version: '2'
 services:
  satellite-view-reporter:
+    environment:
+      - FLASK_HOST=${FLASK_HOST}
+      - FLASK_PORT=${FLASK_PORT}
+      - DEBUG=${DEBUG}
+      - TARGET_LOCATION=${TARGET_LOCATION}
     build: .
     ports:
       - "5016:5016"
     hostname: satellite-view-reporter
     container_name: satellite-view-reporter
+    volumes:
+      - ${NFS_LOCATION}:/satellite_view_reporter/static
     deploy:
       resources:
         limits:
-          cpus: '0.5'
           memory: 4g
 
 networks:
