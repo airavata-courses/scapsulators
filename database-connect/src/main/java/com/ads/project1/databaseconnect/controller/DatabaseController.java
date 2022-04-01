@@ -1,11 +1,14 @@
 package com.ads.project1.databaseconnect.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import com.ads.project1.databaseconnect.service.DatabaseService;
 
 @RestController
 @RequestMapping("/database")
+@Service
 public class DatabaseController {
 	
 	private static final Logger logger = Logger.getLogger(DatabaseController.class.getName());		
@@ -56,6 +60,20 @@ public class DatabaseController {
 			return error;			
 		}
 	}
+	
+
+	@KafkaListener(topics = "test", groupId = "group_id")
+    public void consume(String message) throws IOException {
+		String parts[] = message.split("@");
+		String username = parts[0];
+		String date = parts[1];
+		String time = parts[2];
+		String  nexradstation = parts[3];
+		Audit audit = new Audit(username, date, time, nexradstation, getCurrentDate());
+		logger.info("DATA RECEIVED = "+ audit.getUsername()+ " "+ audit.getDate()+ " "+ audit.getTime()+ " "+ audit.getNexradStation()+  "  "+ getCurrentDate());
+		OutputBody status = dbService.auditsave(audit);
+        logger.info(String.format("#### -> Consumed message -> %s", message));
+    }
 	
 	
 	

@@ -16,6 +16,15 @@ public class Audit {
 		this.currentDate = currentDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Audit [username=" + username + ", date=" + date + ", time=" + time + ", nexradStation=" + nexradStation
+				+ ", currentDate=" + currentDate + ", getUsername()=" + getUsername() + ", getDate()=" + getDate()
+				+ ", getTime()=" + getTime() + ", getNexradStation()=" + getNexradStation() + ", getCurrentDate()="
+				+ getCurrentDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
+
 	public String getUsername() {
 		return username;
 	}
