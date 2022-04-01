@@ -1,6 +1,6 @@
 package com.ads.project1.audit.models;
 
-public class AuditFetch {
+public class Audit {
 	private String username;
 	
 	private String date;
@@ -37,7 +37,7 @@ public class AuditFetch {
 
 	
 
-	public AuditFetch(String date, String time, String nexradStation, String currentDate) {
+	public Audit(String date, String time, String nexradStation, String currentDate) {
 		super();
 		this.date = date;
 		this.time = time;
@@ -45,7 +45,7 @@ public class AuditFetch {
 		this.currentDate = currentDate;
 	}
 	
-	public AuditFetch(String date, String time, String nexradStation, String currentDate, String username) {
+	public Audit(String date, String time, String nexradStation, String currentDate, String username) {
 		super();
 		this.date = date;
 		this.time = time;
@@ -62,7 +62,16 @@ public class AuditFetch {
 		this.username = username;
 	}
 
-	public AuditFetch() {}
+	public Audit() {}
+
+	@Override
+	public String toString() {
+		return "Audit [username=" + username + ", date=" + date + ", time=" + time + ", nexradStation=" + nexradStation
+				+ ", currentDate=" + currentDate + ", getCurrentDate()=" + getCurrentDate() + ", getDate()=" + getDate()
+				+ ", getTime()=" + getTime() + ", getUsername()=" + getUsername() + ", getNexradStation()="
+				+ getNexradStation() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
 
 	public String getNexradStation() {
 		return nexradStation;
