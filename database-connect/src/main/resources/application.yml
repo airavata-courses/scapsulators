@@ -12,6 +12,7 @@ spring:
             database: mygrocerylist
             username: PROJECT1-ADMIN
             password: Project1-ADS
+            authentication-database: admin
 
 server:
     port: 8082
