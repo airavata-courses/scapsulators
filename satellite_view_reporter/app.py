@@ -50,7 +50,10 @@ def get_satellite_view_data():
 
         
         try:
-            svr.download_merra_subset(download_data_dir=app.config.get('STATIC_DIR'))
+            target_filename = svr.download_merra_subset(download_data_dir=app.config.get('STATIC_DIR'))
+            parsed_json = svr.convert_response_to_json(filename=target_filename)
+            json_res = svr.parse_json_dataset(parsed_json)
+            
             response.status_code = http.HTTPStatus.OK
             response.data = 'Created your dataset...'
             return response

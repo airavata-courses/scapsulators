@@ -1,5 +1,5 @@
 from requests import get, __version__
-import os
+import os, re, reverse_geocoder as rg
 
 
 class Satellite_View_Reporter:
@@ -26,9 +26,9 @@ class Satellite_View_Reporter:
         self.MONTH = month
         self.DAY = day
         self.FEATURE = feature_to_visualize
-        self.TIME_WINDOWS = '[0:6:23]' # 24 hours divided into 6 hour chunks
-        self.LAT_WINDOWS = '[0:1:360]' # 360 deg latitudes
-        self.LONG_WINDOWS = '[0:1:575]' # 575 deg longitudes
+        self.TIME_WINDOWS = '[0:4:23]' # 24 hours divided into 6 hour chunks
+        self.LAT_WINDOWS = '[0:5:360]' # 360 deg latitudes divided into 120 chunks
+        self.LONG_WINDOWS = '[0:5:575]' # 575 deg longitudes divided into 115 chunks
         self.PARAMS_TO_RECEIVE = [
                 self.FEATURE+self.TIME_WINDOWS+self.LAT_WINDOWS+self.LONG_WINDOWS, 
                 'lat'+self.LAT_WINDOWS, 
@@ -110,6 +110,8 @@ class Satellite_View_Reporter:
         Args:
             download_data_dir (str): Parent-folder where to download the dataset.
             verbose (bool, optional): Flag to indicate whether to print logs in verbose mode. Defaults to False.
+        Returns:
+            abs_path (str): Absolute path where raw-dataset is stored.
         """
         TGT_FOLDER = os.path.join(download_data_dir)
         _ = self.create_path_if_not_exist(TGT_FOLDER)
@@ -125,3 +127,107 @@ class Satellite_View_Reporter:
             f.write(response.content)
             if verbose:  print(f'Written file to {target_filename}')
         print('Data Ingestion complete...')
+        return target_filename
+
+
+
+
+
+
+    def convert_response_to_json(self, filename='temp.txt', verbose=False):
+        """Converts the raw MERRA-data .txt file into json
+
+        Args:
+            filename (str, optional): Absolute path where raw-dataset is stored. Defaults to 'temp.txt'.
+            verbose (bool, optional): Flag to indicate whether to print logs in verbose mode. Defaults to False.
+
+        Returns:
+            json_data: Parsed version of raw-dataset.
+        """
+        data = None
+        with open(filename, 'r', encoding='utf-8') as f:
+            data = f.readlines()
+
+        json_data = {}
+        for line in data[1:]:
+            parts = line.split(',')
+            key, values = parts[0], [value.strip() for value in parts[1:]]
+            json_data[key] = values
+        if verbose:  print(json_data.keys())
+        return json_data
+
+
+
+
+    def get_country_measurements(self, locations_vs_measurements, verbose=False):
+        """Converts lat-long locations into country-codes.
+        Normalizes the measurements.
+        We're looking at only one timestep within this function.
+
+        Args:
+            locations_vs_measurements (dict): Hashmap of (lat,long) vs measurement captured.
+            verbose (bool, optional): Flag to indicate whether to print logs in verbose mode. Defaults to False.
+
+        Returns:
+            country_measurements (dict): Hashmap of (country_code, avg_measurement).
+        """
+        if verbose:  print('Creating a {country:(sum,count)} dictionary...')
+        country_measurements = dict()
+        all_locations = list(locations_vs_measurements.keys())
+        all_locations_mapped = rg.search(all_locations)
+        for loc, country in zip(all_locations, all_locations_mapped):
+            if verbose:  print(loc, country['cc'], locations_vs_measurements[loc])
+            if country['cc'] not in country_measurements:
+                country_measurements[country['cc']] = [0,0]
+            country_measurements[country['cc']][0] += locations_vs_measurements[loc][0]
+            country_measurements[country['cc']][1] += 1
+
+        if verbose:  print('Normalizing the measurements taken for each country...')
+        total = 0
+        for country, (tot,cnt) in country_measurements.items():
+            country_measurements[country] = tot/cnt
+            total += country_measurements[country]
+
+        for country, val in country_measurements.items():
+            country_measurements[country] = (val/total)*100
+
+        return country_measurements
+
+
+
+
+    def parse_json_dataset(self, json_data, verbose=False):
+        """For each timestep, identifies the relevant keys in the raw-dataset.
+        For these keys, creates a hashmap of {(latitude,longitude):measurement}.
+        Converts lat,long to country-code using get_country_measurements().
+        Returns final data-format for visualizing on React.
+
+        Args:
+            json_data (dict): Parsed json-format of raw-dataset.
+            verbose (bool, optional): Flag to indicate whether to print logs in verbose mode. Defaults to False.
+
+        Returns:
+            json_res (dict): Final parsed data-format to be used for visualization on React.
+        """
+        json_res = dict()
+        for t, time_val in enumerate(json_data['time']):
+            if verbose:  print(f'Getting measurements across all (latitudes,longitudes) within timestep {time_val}..')
+            latitude_rows = []
+            for k in json_data.keys():
+                if re.findall(f'\[{t}\]\[.*\]', k):
+                    if verbose:  print(k)
+                    latitude_rows.append(k)
+
+            locations_vs_measurements = dict()
+            for i,latitude_row in enumerate(latitude_rows):
+                latitude = int(float(json_data['lat'][i]))
+                longitudinal_measurements = json_data[latitude_row]
+                for j, measurement in enumerate(longitudinal_measurements):
+                    longitude = int(float(json_data['lon'][j]))
+                    location = (latitude,longitude)
+                    if location not in locations_vs_measurements:
+                        locations_vs_measurements[location] = []
+                    locations_vs_measurements[location].append(100 if measurement=='1e+15' else float(measurement))
+            json_res[time_val] = self.get_country_measurements(locations_vs_measurements, verbose=False)
+
+        return json_res
