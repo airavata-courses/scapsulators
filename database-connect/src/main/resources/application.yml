@@ -10,6 +10,8 @@ spring:
             host: mongodb
             port: 27017
             database: mygrocerylist
+            username: PROJECT1-ADMIN
+            password: Project1-ADS
 
 server:
     port: 8082
