@@ -2,8 +2,8 @@ version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
 
-    working_directory: ~/scapsulators/react_app # directory where steps will run
-
+    working_directory: ~/scapsulators/gateway # directory where steps will run
+    
     docker: # run the steps with Docker
       - image: cimg/node:17.4.0 # ...with this image as the primary container; this is where all `steps` will run
 
@@ -12,8 +12,7 @@ jobs: # a collection of steps
       - checkout: # check out source code to working directory
          path: ~/scapsulators
          
-      - run: node --version
-      
+ 
       
       - setup_remote_docker:
           version: 19.03.13
@@ -24,8 +23,8 @@ jobs: # a collection of steps
             command: |
               docker --version
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-              docker build -t scapsulators/nasa-react-app:0.0.1 .
-              docker push scapsulators/nasa-react-app:0.0.1
+              docker build -t scapsulators/nasagateway:0.0.1 .
+              docker push scapsulators/nasagateway:0.0.1
              
       - run:
             name: Build Failure
