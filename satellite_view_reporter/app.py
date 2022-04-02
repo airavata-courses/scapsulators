@@ -1,7 +1,9 @@
 from flask import Flask, request, make_response
+from utils.producer import Producer
 from utils.satellite_view_reporter import Satellite_View_Reporter
 from dateutil import parser
-import http
+#from bson.json_util
+import http, json
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -53,9 +55,13 @@ def get_satellite_view_data():
             target_filename = svr.download_merra_subset(download_data_dir=app.config.get('STATIC_DIR'))
             parsed_json = svr.convert_response_to_json(filename=target_filename)
             json_res = svr.parse_json_dataset(parsed_json)
-            
+            json_res = json.dumps(json_res).encode('utf-8')
+            print(f'Created your dataset...{type(json_res)}\n{json_res}\n')
+            print(f'KAFKA_SERVER={app.config.get("KAFKA_SERVER")} , RESPONSE_TOPIC={app.config.get("RESPONSE_TOPIC")}')
+            my_producer = Producer(kafka_server=app.config.get('KAFKA_SERVER'))
+            my_producer.publish(topic=app.config.get('RESPONSE_TOPIC'), message=json_res)
             response.status_code = http.HTTPStatus.OK
-            response.data = 'Created your dataset...'
+            response.data = f'Created your dataset...\n{json_res}'
             return response
         except Exception as e:
             print(f'Something went wrong while reading the MERRA subset of data...\n{e}')
