@@ -10,4 +10,5 @@ EXPOSE 5016
 
 WORKDIR /satellite_view_reporter
 
-CMD ["gunicorn", "--workers=2", "--bind=0.0.0.0:5016", "app:app"]
+#CMD ["gunicorn", "--workers=2", "--bind=0.0.0.0:5016", "app:app"]
+CMD ["python", "app.py"]
