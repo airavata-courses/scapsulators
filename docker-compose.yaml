@@ -5,7 +5,7 @@ services:
     restart: always
     build:
       context: ./gateway
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     container_name: gateway_node
     ports:
       - 5000:5000
@@ -14,7 +14,7 @@ services:
       NODE_ENV: ${NODE_ENV}
 
 
-networks:
-  default:
-    external: true
-    name: weather-app-network
+# networks:
+#   default:
+#     external: true
+#     name: weather-app-network

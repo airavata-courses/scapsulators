@@ -7,7 +7,7 @@ const {
 
 const {verify} = require('../controllers/sessions');
 
-const verifyToken = require("../helpers/verifyToken");
+//const verifyToken = require("../helpers/verifyToken");
 
   const {
     getImg
@@ -20,6 +20,28 @@ const verifyToken = require("../helpers/verifyToken");
 
 const express = require("express");
 const router = express.Router();
+
+const verifyToken = async (req,res,next) =>{
+  try {
+
+const token = req.headers.authorization;
+if(!token) {res.json({error:"Unauthorized!", status: 500});
+  return
+};
+const ticket = await client.verifyIdToken({ 
+      idToken: token,
+      audience: process.env.CLIENT_ID
+  }); 
+  console.log(ticket['payload']['email']);
+}
+
+  catch(err){
+      res.json({error:err.toString(), status: 500});
+      return
+  }
+next()
+}
+
 
 //authentication api's
 router.post("/login", login);
