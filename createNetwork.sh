@@ -10,6 +10,14 @@ openstack security group rule create --protocol tcp --dst-port 30001:30001 --rem
 
 openstack security group rule create --protocol tcp --dst-port 30002:30002 --remote-ip 0.0.0.0/0 scapsulators-security-group
 
+openstack security group rule create --protocol tcp --dst-port 6443:6443 --remote-ip 0.0.0.0/0 scapsulators-security-group
+
+openstack security group rule create --protocol tcp --dst-port 1:65525 --remote-ip 0.0.0.0/0 scapsulators-security-group
+
+
+
+openstack security group rule create --protocol icmp scapsulators-security-group
+
 #create network
 openstack network create scapsulators-network
 
