@@ -9,18 +9,19 @@ Spring 2022 Project
 <ul>
 <li>This standalone microservice is intended to fetch an intuitive <b>GIF image</b>, for visualizing a specific radar-station's surroundings at a specific point in time using <b>MERRA's S3 data-lake</b>.</li>
 <li>This separated microservice will <b>avoid a single-point of failure</b> for accessing all weather-reporting data.</li>
-<li>The logic here focuses on pulling in specific MERRA data subsets into a Network File System and then notifying the downstream Java-microservice via a Kafka-topic message.</li>
+<li>The logic here focuses on pulling in specific MERRA data subsets into a visualizable format and then notifying the Java-microservice via a Kafka-topic message.</li>
 </ul>
 
 ## Working
 
 <ul>
-<li>Satellite-View-Reporter runs a Flask application to accept a JSON-body request and transmit out a GIF image.</li>
+<li>Satellite-View-Reporter runs a Flask application to accept a JSON-body request and send out a compressed version of the huge dataset.</li>
 <li>The message content should be a bytestream of JSON-like request-parameters.
-<code>SAMPLE REQUEST-BODY: {"visualize":"LWGNTICE", "timestamp":"2018-09-01 09:27:53"}</code>
+<code>SAMPLE REQUEST-BODY: {"visualize":"LWGNTICE", "timestamp":"2018-09-01"}</code>
+<code>SAMPLE REQUEST-BODY: {"visualize":"ALBEDO", "timestamp":"2021-12-31"}</code>
 </li>
 
-<li>The <i><b>"visualize"</i></b> parameter can also take on <i>velocity</i>, or <i>spectrum_width</i> values. Some insight into these parameters is <a href="https://github.com/airavata-courses/scapsulators/wiki/Weather-enthusiasts-assemble"> here.</a>
+<li>The <i><b>"visualize"</i></b> parameter can take on <i>ALBEDO</i>, or <i>LWGNTICE</i> values. Some insight into these parameters is <a href="https://github.com/airavata-courses/scapsulators/wiki/Weather-enthusiasts-assemble"> here.</a>
 </li>
 <li>The response will be the aforementioned data-subset for visualizing the weather-report from a satellite's perspective, at that point in time.</li>
 </ul>

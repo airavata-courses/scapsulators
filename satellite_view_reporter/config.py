@@ -1,7 +1,4 @@
 import os
-#from dotenv import load_dotenv
-#ENV_VARS_PATH = os.path.join(os.path.dirname(__file__), 'config.env')
-#load_dotenv(ENV_VARS_PATH)
 
 # Flask Parameters
 DEBUG = os.environ.get('DEBUG', False)
