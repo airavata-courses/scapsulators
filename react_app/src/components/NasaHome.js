@@ -49,7 +49,7 @@ function NasaHome() {
         <GeoPlot setTooltipContent={setContent} data={data} />
         <ReactTooltip>{content}</ReactTooltip>
         <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-            <DatePicker className="date" onChange={onChange} value={value} isOpen={true}/>
+            <DatePicker className="date" onChange={onChange} value={value} isOpen={true} clearIcon={null}/>
             <Button
 								className="button"
                 style={{width:"10%"}}
