@@ -23,8 +23,8 @@ jobs: # a collection of steps
             command: |
               docker --version
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-              docker build -t scapsulators/nasagateway:0.0.1 .
-              docker push scapsulators/nasagateway:0.0.1
+              docker build -t scapsulators/gateway:0.0.3 .
+              docker push scapsulators/gateway:0.0.3
              
       - run:
             name: Build Failure
