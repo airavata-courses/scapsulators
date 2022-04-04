@@ -18,7 +18,7 @@ openstack server add floating ip scapsulators-worker $(openstack floating ip cre
 #ssh -i scapsulators ubuntu@$(openstack server list | grep master-server | awk '{print $9}') -q
 
 
-public_ip=$(openstack server list | grep scapsulators-master | awk '{print $9}')
-private_ip=$(openstack server list | grep scapsulators-master | awk '{print $8}' | cut -b 22- | rev | cut -b 2- | rev)
+public_ip=$(openstack server list | grep scapsulators-worker | awk '{print $9}')
+private_ip=$(openstack server list | grep scapsulators-worker | awk '{print $8}' | cut -b 22- | rev | cut -b 2- | rev)
 
 echo Public Ip = $public_ip  Private Ip = $private_ip
