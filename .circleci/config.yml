@@ -28,7 +28,7 @@ jobs: # a collection of steps
             command: |
               ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
                   sudo su -
-                  cd scapsulators
+                  cd scapsulators/kubernetes
                   kubectl delete -f react.yaml
                   git pull
                   kubectl apply -f react.yaml
