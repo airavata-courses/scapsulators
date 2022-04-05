@@ -6,5 +6,5 @@ worker_private_ip=$(openstack server list | grep $2 | awk '{print $8}' | cut -b 
 
 
 scp -i ~/.ssh/scapsulators -oStrictHostKeyChecking=no ~/.ssh/scapsulators  ubuntu@$masterip:~/.ssh/id_rsa
-ssh -i ~/.ssh/scapsulators -oStrictHostKeyChecking=no ubuntu@$masterip -q 'bash -s' < masterconfig.sh $master_private_ip $worker_private_ip
+ssh -i ~/.ssh/scapsulators -oStrictHostKeyChecking=no ubuntu@$masterip -q 'bash -s' < masterconfig.sh $master_private_ip $worker_private_ip >> log.txt
 
