@@ -1,5 +1,5 @@
 #!/bin/sh
-openstack server create scapsulators-worker \
+openstack server create $1 \
 --flavor m3.quad \
 --image Featured-Ubuntu20 \
 --key-name scapsulators \
@@ -14,11 +14,11 @@ openstack floating ip create public
 
 #openstack server add floating ip master-server 149.165.155.41
 
-openstack server add floating ip scapsulators-worker $(openstack floating ip create public -f value | sed -n '6 p')
+openstack server add floating ip $1 $(openstack floating ip create public -f value | sed -n '6 p')
 #ssh -i scapsulators ubuntu@$(openstack server list | grep master-server | awk '{print $9}') -q
 
 
-public_ip=$(openstack server list | grep scapsulators-worker | awk '{print $9}')
-private_ip=$(openstack server list | grep scapsulators-worker | awk '{print $8}' | cut -b 22- | rev | cut -b 2- | rev)
+public_ip=$(openstack server list | grep $1 | awk '{print $9}')
+private_ip=$(openstack server list | grep $1 | awk '{print $8}' | cut -b 22- | rev | cut -b 2- | rev)
 
 echo Public Ip = $public_ip  Private Ip = $private_ip
