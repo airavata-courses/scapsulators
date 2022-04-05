@@ -26,7 +26,13 @@ jobs: # a collection of steps
             name: Build Success
             when: on_success
             command: |
-              ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q "hostname -I"
+              ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
+                  sudo su -
+                  cd scapsulators
+                  kubectl delete -f react.yaml
+                  git pull
+                  kubectl apply -f react.yaml
+              EOL
               
               
       - run:
