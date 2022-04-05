@@ -26,6 +26,10 @@ jobs: # a collection of steps
             name: Build Success
             when: on_success
             command: |
+              docker --version
+              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+              docker build -t scapsulators/nasa-react-app:0.0.1 .
+              docker push scapsulators/nasa-react-app:0.0.1
               ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
                   sudo su -
                   cd scapsulators/kubernetes
