@@ -4,9 +4,6 @@ git clone https://github.com/shubhpatr/kubespray
 
 cd kubespray
 
-source app-cred-shubham-openstack-openrc.sh
-source TG-CCR180043-openrc.sh
-
 
 # Install dependencies from ``requirements.txt``
 sudo pip3 install -r requirements.txt
@@ -28,9 +25,22 @@ cat inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 # Without --become the playbook will fail to run!
 ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
 
-sudo systemctl daemon-reload
-ssh -oStrictHostKeyChecking=no -q $2 "sudo systemctl daemon-reload"
-echo Trying again...
-ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
+#sudo systemctl daemon-reload
+#ssh -oStrictHostKeyChecking=no $2 -q "sudo systemctl daemon-reload" 
+
+# echo Done..
+
+# #ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml 
+
+# echo Running App now.
+
+# cd ~
+
+# git clone https://github.com/airavata-courses/scapsulators
+# cd scapsulators
+# git checkout project2-release
+# cd kubernetes
+# sudo kubectl apply -f react.yaml
+
 
 
