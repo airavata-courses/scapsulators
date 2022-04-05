@@ -30,7 +30,7 @@ ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root 
 
 sudo systemctl daemon-reload
 ssh -oStrictHostKeyChecking=no -q $2 "sudo systemctl daemon-reload"
-
+echo Trying again...
 ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
 
 
