@@ -4,6 +4,10 @@ git clone https://github.com/shubhpatr/kubespray
 
 cd kubespray
 
+source app-cred-shubham-openstack-openrc.sh
+source TG-CCR180043-openrc.sh
+
+
 # Install dependencies from ``requirements.txt``
 sudo pip3 install -r requirements.txt
 
