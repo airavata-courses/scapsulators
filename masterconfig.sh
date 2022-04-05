@@ -27,3 +27,10 @@ cat inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 # installing packages and interacting with various systemd daemons.
 # Without --become the playbook will fail to run!
 ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
+
+sudo systemctl daemon-reload
+ssh -oStrictHostKeyChecking=no -q $2 "sudo systemctl daemon-reload"
+
+ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
+
+
