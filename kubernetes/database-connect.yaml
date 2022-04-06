@@ -17,6 +17,7 @@ spec:
       containers:
       - name: database-connect
         image: scapsulators/database-connect-service:0.0.3
+        imagePullPolicy: Always
         ports:
         - containerPort: 8082
 
