@@ -13,6 +13,8 @@ const {verify} = require('../controllers/sessions');
     getImg
   } = require("../controllers/weather");
 
+  const {getnasaData} = require("../controllers/nasadata");
+
   const {
     getAudit,
     writeAudit
@@ -55,6 +57,9 @@ router.post("/verifySession", verify);
 
 //python nexrad api
 router.post("/getimg", getImg);
+
+//nasa data
+router.post("/getnasa", getnasaData);
 
 //user audit api
 router.post("/getaudit",verifyToken, getAudit);

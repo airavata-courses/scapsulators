@@ -6,7 +6,7 @@ const {
   } = require("../controllers/audit");
 
 //const weathUrl = "http://localhost:5001/"
-const weathUrl = process.env.PYTHON_URL
+const weathUrl = process.env.PYTHON_URL;
 
 console.log(weathUrl);
 module.exports = {
