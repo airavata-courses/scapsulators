@@ -228,6 +228,6 @@ class Satellite_View_Reporter:
                     if location not in locations_vs_measurements:
                         locations_vs_measurements[location] = []
                     locations_vs_measurements[location].append(100 if measurement=='1e+15' else float(measurement))
-            json_res[time_val] = self.get_country_measurements(locations_vs_measurements, verbose=False)
+            json_res[t] = self.get_country_measurements(locations_vs_measurements, verbose=False)
 
         return json_res
