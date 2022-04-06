@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: satellite-view-reporter
+  labels:
+    app: satellite-view-reporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: satellite-view-reporter
+  template:
+    metadata:
+      labels:
+        app: satellite-view-reporter
+    spec:
+      containers:
+      - name: satellite-view-reporter
+        image: scapsulators/python-satellite-viewer-app:0.0.1
+        ports:
+        - containerPort: 5006
+        env:
+        - name: DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: DEBUG
+        - name: FLASK_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: FLASK_HOST
+        - name: FLASK_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: FLASK_PORT
+
+        - name: TARGET_LOCATION
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: TARGET_LOCATION
+        - name: NFS_LOCATION
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: NFS_LOCATION
+        - name: KAFKA_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: KAFKA_SERVER
+
+        - name: REQUEST_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: REQUEST_TOPIC
+        - name: RESPONSE_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: RESPONSE_TOPIC
+        - name: GROUP_ID
+          valueFrom:
+            configMapKeyRef:
+              name: satellite-view-reporter-configmap
+              key: GROUP_ID
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: satellite-view-reporter
+spec:
+  selector:
+    app: satellite-view-reporter
+  ports:
+    - protocol: TCP
+      port: 5006
+      targetPort: 5006

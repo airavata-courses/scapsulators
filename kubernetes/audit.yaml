@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: audit-micro
-        image: scapsulators/audit-service:0.0.1
+        image: scapsulators/audit-service:0.0.2
         ports:
         - containerPort: 8084
 

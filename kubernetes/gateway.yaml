@@ -15,7 +15,10 @@ spec:
     spec:
       containers:
       - name: gateway-image
-        image: scapsulators/gateway:0.0.1
+        image: scapsulators/nasagateway:0.0.1
+        imagePullPolicy: Always
+
+
 ---
 apiVersion: v1
 kind: Service

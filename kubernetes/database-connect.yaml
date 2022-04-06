@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: database-connect
-        image: scapsulators/database-connect-service:0.0.1
+        image: scapsulators/database-connect-service:0.0.3
         ports:
         - containerPort: 8082
 

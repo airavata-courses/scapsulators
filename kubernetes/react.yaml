@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: react-frontend
-        image: scapsulators/react-app:0.0.2
+        image: scapsulators/nasa-react-app:0.0.1
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
