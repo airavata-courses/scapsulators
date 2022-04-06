@@ -37,19 +37,17 @@ Run the docker container using the provided `.bat` file:
 
 `> start-app.bat`
 
-The server for the python app is running on port `5016`. This is configurable from the `.env` file.
-
 ### Note:
-Building the Docker image takes time ($\approx$20 minutes)- the Python dependencies of scientific libraries (PyArt, metpy, etc.) are quite heavy.
+Building the Docker image takes at most a few minutes.
 
 
 ## Implementation Status
 
-The service uses `REST` for asynchronous communication, and we will use `Kafka` to implement message streaming towards the `Java-Redis-Connector` after data-ingestion.
+The service uses `Kafka` for asynchronous communication, and message streaming towards the `Java-Redis-Connector` after data-ingestion.
 
-`Satellite_View_Reporter` class in `satellite_view_reporter.py` is used to parse the required MERRA data using the `OPeNDAP` software specifications. There's a good amount of documentation for each function to interpret the underlying data, and subsequently store the subset data onto a Network-File-System.
+`Satellite_View_Reporter` class in `satellite_view_reporter.py` is used to parse the required MERRA data using the `OPeNDAP` software specifications. There's a good amount of documentation for each function to interpret the underlying data. We don't store the subset data onto a Network-File-System, since we're already subsetting the huge-dataset using `OPeNDAP`, and are parsing the entire response into a manageable (maximum) 120kB response.
 
-`app.py` defines the Flask application functionality: `routes` aren't the focus here.
+`app.py` defines the main application functionality.
 
 
 
