@@ -39,14 +39,14 @@ jobs: # a collection of steps
             command: mvn package
         
       - run:
-        name: Build and push Docker image to Dockerhub
-        command: mvn clean compile jib:build -Dimage=scapsulators/audit-service:0.0.2
+          name: Build and push Docker image to Dockerhub
+          command: mvn clean compile jib:build -Dimage=scapsulators/audit-service:0.0.2
       
       
       - run:
             name: Build Success
             when: on_success
-            command: |
+            command:
               ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
                   sudo su -
                   cd scapsulators/kubernetes
