@@ -17,6 +17,7 @@ spec:
       containers:
       - name: satellite-view-reporter
         image: scapsulators/python-satellite-viewer-app:0.0.1
+        imagePullPolicy: Always
         ports:
         - containerPort: 5006
         env:
