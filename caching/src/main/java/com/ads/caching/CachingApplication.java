@@ -59,8 +59,9 @@ public class CachingApplication {
     		
     		
     			logger.info("CachingApplication :: CachingApplication : Waiting for Kafka Consumer");
+			logger.info("CachingApplication :: CachingApplication : Waiting for Consumer to consume data : "+KafkaConsumer.consumerData.getId());
     			while(KafkaConsumer.consumerData.getId().equals("-1")) {
-    				logger.info("CachingApplication :: CachingApplication : Waiting for Consumer to consume data : "+KafkaConsumer.consumerData.getId());
+    				
     			}
     			logger.info("CachingApplication :: CachingApplication : Saving to Redis");
     			logger.info("CachingApplication :: CachingApplication : Consumed in string in controller = "+KafkaConsumer.consumerDataString);
