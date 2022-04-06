@@ -46,7 +46,8 @@ jobs: # a collection of steps
       - run:
             name: Build Success
             when: on_success
-            command:
+            command: |
+              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
               ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
                   sudo su -
                   cd scapsulators/kubernetes
