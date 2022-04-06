@@ -7,6 +7,8 @@ async function getData(body, user) {
       const userDetails = getCookie();
       console.log('sending', body);
       body['username'] = userDetails['email'];
+
+      console.log(body);
       var config = {
         method: 'post',
         url: `http://${url}/api/getimg`,

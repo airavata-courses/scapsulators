@@ -1,1 +1,1 @@
-export const url = 'localhost:5000';
+export const url = 'http://scapsulators.ignorelist.com:30001';
