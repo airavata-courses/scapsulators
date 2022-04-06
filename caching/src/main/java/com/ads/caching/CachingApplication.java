@@ -49,6 +49,7 @@ public class CachingApplication {
     public String save(@RequestBody NASAData product) {
     	try {
     		logger.info("CachingApplication :: CachingApplication : Looking in cache");
+		KafkaConsumer.consumerData.setId("-1");
     		String response = findProduct(product.getTimestamp()+"@"+product.getVisualize());
     		logger.info("RESPONSE = "+response);   	
     		logger.info("Sending = PRODUCING################"+product.getTimestamp());
