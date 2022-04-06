@@ -1,1 +1,1 @@
-export const url = 'http://scapsulators.ignorelist.com:30002';
+export const url = 'scapsulators.ignorelist.com:30002';
