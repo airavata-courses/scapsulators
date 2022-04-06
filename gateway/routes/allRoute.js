@@ -62,7 +62,7 @@ router.post("/getimg", getImg);
 router.post("/getnasa", getnasaData);
 
 //user audit api
-router.post("/getaudit",verifyToken, getAudit);
+router.post("/getaudit", getAudit);
 router.post("/writeaudit", writeAudit);
 
 module.exports = router;
