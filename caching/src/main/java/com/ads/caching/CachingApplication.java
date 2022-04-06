@@ -66,7 +66,9 @@ public class CachingApplication {
     			logger.info("CachingApplication :: CachingApplication : Saving to Redis");
     			logger.info("CachingApplication :: CachingApplication : Consumed in string in controller = "+KafkaConsumer.consumerDataString);
 
-    			dao.saveRedisObject(product.getTimestamp()+"@"+product.getVisualize(), KafkaConsumer.consumerDataString);
+    			if(!(KafkaConsumer.consumerDataString.equals("FAIL"))) {
+    				dao.saveRedisObject(product.getTimestamp()+"@"+product.getVisualize(), KafkaConsumer.consumerDataString);
+    			}
     		
         		
     			logger.info("CachingApplication :: CachingApplication : Saved in Cache");
