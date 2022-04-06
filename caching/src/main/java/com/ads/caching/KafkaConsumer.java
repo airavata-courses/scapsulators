@@ -24,9 +24,8 @@ public class KafkaConsumer {
 			   logger.info("CachingApplication ::  KafkaConsumer : Data consumed : "+new String(data));
 		   
 		   
-			   JSONObject dataInJSON=new JSONObject(new String(data));
-			   consumerDataString = new String(data);
-			   consumerDataJSON = dataInJSON;		  
+			   
+			   consumerDataString = new String(data);	  
 		   
 			   KafkaConsumer.consumerData.setId("1");
 			   logger.info("CONSUMERDATA AFTER: " + consumerData.getId());
