@@ -17,6 +17,7 @@ spec:
       containers:
       - name: weather-reporter
         image: scapsulators/python-app:0.0.1
+        imagePullPolicy: Always
         ports:
         - containerPort: 5006
         env:
