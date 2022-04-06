@@ -19,8 +19,8 @@ class Satellite_View_Reporter:
         self.REQ_FORMAT = 'ascii'
         self.BASE_URL = 'https://goldsmr4.gesdisc.eosdis.nasa.gov/opendap/MERRA2/'
         self.MERRA2_version = '5.12.4'
-        self.COLLECTION_SHORTNAME = 'M2T1NXOCN'
-        self.COLLECTION_LONGNAME  = 'tavg1_2d_ocn_Nx'
+        self.COLLECTION_SHORTNAME = 'M2T1NXOCN' if feature_to_visualize=='LWGNTICE' else 'M2T1NXRAD'
+        self.COLLECTION_LONGNAME  = 'tavg1_2d_ocn_Nx' if feature_to_visualize=='LWGNTICE' else 'tavg1_2d_rad_Nx'
         self.COLLECTION_NUMBER = 'MERRA2_401' if year=='2020' and month=='09' else 'MERRA2_400'
         self.YEAR = year
         self.MONTH = month
@@ -43,7 +43,7 @@ class Satellite_View_Reporter:
 
         Returns: 0 if invalid, 1 if valid
         """
-        if None in [self.FEATURE, self.YEAR, self.DAY, self.MONTH] or self.FEATURE not in ['LWGNTICE']:
+        if None in [self.FEATURE, self.YEAR, self.DAY, self.MONTH] or self.FEATURE not in ['LWGNTICE', 'ALBEDO']:
             return 0
         return 1
 
