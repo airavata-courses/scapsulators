@@ -69,6 +69,9 @@ public class CachingApplication {
     			if(!(KafkaConsumer.consumerDataString.equals("FAIL") || KafkaConsumer.consumerDataString.contains("Sorry"))) {
     				dao.saveRedisObject(product.getTimestamp()+"@"+product.getVisualize(), KafkaConsumer.consumerDataString);
     			}
+			else{
+				return "FAIL";
+			}
     		
         		
     			logger.info("CachingApplication :: CachingApplication : Saved in Cache");
