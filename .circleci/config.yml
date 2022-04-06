@@ -22,6 +22,13 @@ jobs: # a collection of steps
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
               docker build -t scapsulators/python-satellite-viewer-app:0.0.1 .
               docker push scapsulators/python-satellite-viewer-app:0.0.1
+              ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
+                  sudo su -
+                  cd scapsulators/kubernetes
+                  kubectl delete -f satellite-view-reporter.yaml
+                  git pull
+                  kubectl apply -f satellite-view-reporter.yaml
+              EOL
              
       - run:
             name: Build Failure
