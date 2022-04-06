@@ -17,6 +17,7 @@ spec:
       containers:
       - name: audit-micro
         image: scapsulators/audit-service:0.0.2
+        imagePullPolicy: Always
         ports:
         - containerPort: 8084
 
