@@ -17,6 +17,7 @@ spec:
       containers:
       - name: authentication-micro
         image: scapsulators/authentication-service:0.0.1
+        imagePullPolicy: Always
         ports:
         - containerPort: 8081
 
