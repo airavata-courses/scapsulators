@@ -8,6 +8,10 @@ jobs: # a collection of steps
       - image: cimg/node:17.4.0 # ...with this image as the primary container; this is where all `steps` will run
 
     steps: # a collection of executable commands
+    
+      - add_ssh_keys:
+          fingerprints:
+            - "a9:e3:cc:51:62:6b:9c:36:e0:51:a6:5f:ec:27:30:8f"
 
       - checkout: # check out source code to working directory
          path: ~/scapsulators
@@ -25,6 +29,13 @@ jobs: # a collection of steps
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
               docker build -t scapsulators/nasagateway:0.0.1 .
               docker push scapsulators/nasagateway:0.0.1
+              ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
+                  sudo su -
+                  cd scapsulators/kubernetes
+                  kubectl delete -f gateway.yaml
+                  git pull
+                  kubectl apply -f gateway.yaml
+              EOL
              
       - run:
             name: Build Failure
