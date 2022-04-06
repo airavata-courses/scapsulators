@@ -35,6 +35,7 @@ module.exports = {
     writeAudit: async (param) => {
         try{
             
+            console.log('Saving now!');
             console.log(param);
             axios.post(audUrl + 'audit/save', null, { params: param}).then((result) => {
                 // res.status(200);
