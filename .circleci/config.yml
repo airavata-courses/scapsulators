@@ -20,18 +20,36 @@ jobs: # a collection of steps
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: database-connect-{{ checksum "pom.xml" }}
 
-      - run: mvn dependency:go-offline # gets the project dependencies
+      - run:
+          name: Get project dependencies
+          command: mvn dependency:go-offline
 
       - save_cache: # saves the project dependencies
           paths:
             - ~/.m2
           key: database-connect-{{ checksum "pom.xml" }}
 
-      - run: mvn package 
-               # run the actual tests
-      # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=scapsulators/database-connect-service:0.0.3
+      - run:
+          name: Run test-suite
+          command: mvn package 
+               
+      
+      - run:
+          name: Build and push Docker image to Dockerhub
+          command: mvn clean compile jib:build -Dimage=scapsulators/database-connect-service:0.0.3
 
+      - run:
+            name: Build Success
+            when: on_success
+            command: |
+              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+              ssh -oStrictHostKeyChecking=no shubhpatr@scapsulators.ignorelist.com -q <<'EOL'
+                  sudo su -
+                  cd scapsulators/kubernetes
+                  kubectl delete -f database-connect.yaml
+                  git pull
+                  kubectl apply -f database-connect.yaml
+              EOL
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
           # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
