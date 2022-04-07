@@ -59,7 +59,7 @@ public class AuditController {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
 		String strDate = dateFormat.format(currdate);  
 
-		String sendMessage = username+"@"+date+"@"+time+"@"+nexradstation;
+		String sendMessage = username+"#"+date+"#"+time+"#"+nexradstation;
 		sendMessage(sendMessage);
 		//return status;
 		OutputBody status = new OutputBody("SUCCESS","200");
