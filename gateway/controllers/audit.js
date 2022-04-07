@@ -42,10 +42,12 @@ module.exports = {
                 // res.json({data: result.data, status: 200});
                 return {data: result.data, status: 200}
             }).catch((err) => { //res.json({error:err.toString(), status: 500})
+                console.log(err);
                 return {error:err.toString(), status: 500}
             } )
         }
         catch(err){
+            console.log(err);
             return {error:err.toString(), status: 500} ;   
         }
 
