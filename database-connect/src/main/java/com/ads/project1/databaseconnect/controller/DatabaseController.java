@@ -64,7 +64,7 @@ public class DatabaseController {
 
 	@KafkaListener(topics = "test", groupId = "group_id")
     public void consume(String message) throws IOException {
-		String parts[] = message.split("@");
+		String parts[] = message.split("#");
 		String username = parts[0];
 		String date = parts[1];
 		String time = parts[2];
