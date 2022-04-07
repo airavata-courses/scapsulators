@@ -36,7 +36,7 @@ export default function SignInPage() {
     return (
         <div className="text-center m-5-auto">
             <h2>Sign In</h2>
-            <p> Welcome to our humble abode, fellow weather enthusiasts!!</p>
+            <h4> Welcome to our humble abode, fellow weather enthusiasts!!</h4>
 
 
             <GoogleLogin
