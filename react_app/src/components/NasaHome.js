@@ -9,6 +9,7 @@ import newData from '../data/temp.json';
 import { useEffect } from 'react';
 import Button from "react-bootstrap/Button";
 import {getNasaData} from "../api/getnasa";
+import {Rings} from 'react-loader-spinner';
 
 
 function NasaHome() {
@@ -18,9 +19,11 @@ function NasaHome() {
     const [dataset, setDataset] = useState(newData);
     const [data, setData] = useState(newData["0"]);
     const [nasaType, setNasaType] = useState("ALBEDO");
+    const [loading,setLoading] = useState(false);
 
     
     async function handleSubmit(e){ 
+      setLoading(true);
       console.log(value.toLocaleDateString());
       //hit gateway api
       //and set dataset and data it will work
@@ -33,6 +36,7 @@ function NasaHome() {
       else {
         alert('Failed!');
       }
+      setLoading(false);
 
     }
 
@@ -71,7 +75,8 @@ function NasaHome() {
         </select>
 								
             <DatePicker className="date" onChange={onChange} value={value} isOpen={true} clearIcon={null}/>
-            <Button
+            
+            {loading == false ? <Button
 								className="button"
                 style={{width:"10%"}}
 								variant="primary"
@@ -79,7 +84,9 @@ function NasaHome() {
                 onClick={handleSubmit}
 							>
 								Visualize
-							</Button>
+							</Button> : <Rings color="#9deff2" height={50} width={50} />}
+
+
               </div>
       </div>
     );
