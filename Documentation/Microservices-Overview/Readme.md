@@ -1,1 +1,0 @@
-# Mockups and rough ideation of microservice architectures
