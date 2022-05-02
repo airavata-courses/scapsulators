@@ -3,4 +3,4 @@
     
  - Create ClusterIssuer
 
-     - kubectl apply -f  letsencrypt-prod-cluster-issuer.yaml 
+     - kubectl apply -f  issuer.yaml 
