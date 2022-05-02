@@ -320,7 +320,7 @@ primary:
       - ReadWriteOnce
     ## Persistent Volume size
     ##
-    size: 4Gi
+    size: 2Gi
     ## selector can be used to match an existing PersistentVolume
     ## selector:
     ##   matchLabels:
