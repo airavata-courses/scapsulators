@@ -1,3 +1,8 @@
+In your cluster master, do this for all nodes
+
+` kubectl label nodes node_name custosServiceWorker="enabled"`
+
+
 In your local or any other VM. 
 
 ```
