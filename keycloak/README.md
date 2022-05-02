@@ -34,3 +34,13 @@ Then deploy postgresql
 Replace hostname in ingress.yaml
 - `kubectl apply -f ingress.yaml -n keycloak`
 
+
+user: admin
+
+Get admin password.
+
+- `kubectl get secret credential-custos-keycloak -o yaml -n keycloak`
+
+- `echo "passwordhere" | base64 --decode`
+
+
