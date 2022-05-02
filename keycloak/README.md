@@ -9,7 +9,7 @@ Create three PVs for each mount point   /bitnami/postgresql
 
 Then deploy postgresql 
 
-- `helm install keycloak-db-postgresql bitnami/postgresql -f postgresql-values.yaml -n keycloak --version 10.12.3`
+- `helm install keycloak-db-postgresql bitnami/postgresql -f values.yaml -n keycloak --version 10.12.3`
 
 - `cd ..`
 
