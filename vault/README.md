@@ -1,7 +1,7 @@
 
 #### Deploy Vault
 
-`helm install vault hashicorp/vault     --namespace vault     -f vaules.yaml     --version 0.10.0`
+`helm install vault hashicorp/vault     --namespace vault     -f values.yaml     --version 0.10.0`
 
 Change hostname in ingress.yaml
 
