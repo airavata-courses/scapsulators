@@ -26,6 +26,7 @@ Then deploy postgresql
 - `make cluster/prepare` 
 
 - `kubectl apply -f deploy/operator.yaml -n keycloak`
+-  `cd ..`
 
 - `kubectl apply -f keycloak-db-secret.yaml -n keycloak`
 - `kubectl apply -f custos-keycloak.yaml -n keycloak`
