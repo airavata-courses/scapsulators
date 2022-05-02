@@ -1,6 +1,6 @@
-### Deploy cert-manager
-### Deploy postgres
-### Deploy keycloak
-### Deploy consul
-### Deploy vault
-### Deploy custos
+<li> Deploy cert-manager </li>
+<li>  Deploy postgres </li>
+<li> Deploy keycloak </li>
+<li> Deploy consul </li>
+<li>  Deploy vault </li>
+<li>  Deploy custos </li>
