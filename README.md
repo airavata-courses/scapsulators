@@ -1,6 +1,6 @@
 ### Deploy cert-manager
- -  kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml
-    
- - Create ClusterIssuer
-
-     - kubectl apply -f  letsencrypt-prod-cluster-issuer.yaml 
+### Deploy postgres
+### Deploy keycloak
+### Deploy consul
+### Deploy vault
+### Deploy custos
