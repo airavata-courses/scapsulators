@@ -2,7 +2,7 @@
 
 Create directory /hashicorp/consul/data in each of your nodes, 
 
-- `chmod 777 -R hashichorp`
+- `sudo chmod 777 -R hashichorp`
 
 ```
 kubectl apply -f pv.yaml,pv1.yaml
