@@ -2,8 +2,8 @@ Parameters to be added
 
 ```
 Hostname: js-168-203.jetstream-cloud.org
-SSH_user: shubhpatr
-SSH_user_password: shubham123
+SSH_user: shubham
+SSH_user_password: pass123
 SSH_key: your key path
 Keycloak_username: admin 
 Keycloak_password: KH2Jis67bJ1N8g==
