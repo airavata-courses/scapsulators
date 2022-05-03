@@ -6,10 +6,10 @@ SSH_user: shubham
 SSH_user_password: pass123
 SSH_key: your key path
 Keycloak_username: admin 
-Keycloak_password: KH2Jis67bJ1N8g==
-vault_token: s.6HT5n0BtgU61OFa3qhz6X3oA
-MYSQL_user: root
-MYSQL_password: root
+Keycloak_password: keycloak_pass
+vault_token: vault_token
+MYSQL_user: user
+MYSQL_password: pass
 docker_repo: scapsulators
 ```
 
