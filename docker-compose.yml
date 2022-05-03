@@ -1,0 +1,12 @@
+version: '2'
+services:
+  custos-testing-app:
+    build: .
+    ports:
+      - "5005:5005"
+    hostname: custos-testing-app
+    container_name: custos-testing-app
+    deploy:
+      resources:
+        limits:
+          memory: 4g

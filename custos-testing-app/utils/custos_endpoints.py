@@ -1,4 +1,3 @@
-import os
 import json
 import random, string
 from custos.clients.user_management_client import UserManagementClient
@@ -180,14 +179,11 @@ class Custos:
     def check_user_permissions(self, users):
         accesses = {}
         for user in users:
-                i = random.randint(0,10)
-                username = f'{user["username"]}{i}'
-                print(username)
                 access = self.sharing_management_client.user_has_access(token=self.b64_encoded_custos_token,
                                                                 client_id=self.custos_settings.CUSTOS_CLIENT_ID,
                                                                 entity_id=self.resource_ids[0],
                                                                 permission_type='READ',
-                                                                user_id=username)
-                accesses[username] = access
-                print(f'Access for user {username}: {access}')
+                                                                user_id=user["username"])
+                accesses[user["username"]] = access
+                print(f'Access for user {user["username"]}: {access}')
         return f'Users have access: {accesses}'

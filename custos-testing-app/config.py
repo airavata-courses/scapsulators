@@ -2,7 +2,7 @@ admin_user_name = 'shmoha@iu.edu'
 admin_password = 'Scapsulators2022!'
 
 
-# register_users()
+# register_users
 users = [
     {
         'username': 'alice',
@@ -51,7 +51,7 @@ users = [
 
 
 
-# create_groups()
+# create_groups
 groups = [
     {
         'name': 'Admin',
@@ -72,7 +72,7 @@ groups = [
 
 
 
-# allocate_users_to_groups()
+# allocate_users_to_groups
 user_group_mapping = [
     {
         'group_name': 'Admin',
@@ -115,7 +115,7 @@ child_gr_parent_gr_mapping = [
 
 
 
-# create_permissions()
+# create_permissions
 permissions = [
     {
         'id': 'READ',
@@ -134,7 +134,7 @@ permissions = [
 
 
 
-# create_entity_types()
+# create_entity_types
 entity_types = [
     {
         'id': 'PROJECT',
@@ -151,7 +151,7 @@ entity_types = [
 
 
 
-# register_resources()
+# register_resources
 resources = [
     {
         'name': 'SEAGRD_EXP',
@@ -160,3 +160,18 @@ resources = [
         'type': 'EXPERIMENT'
     }
 ]
+
+
+
+
+'''
+register_users
+create_groups
+allocate_users_to_groups
+allocate_child_group_to_parent_group
+create_permissions
+create_entity_types
+share_resource_with_group
+share_resource_with_user
+register_resources
+'''
