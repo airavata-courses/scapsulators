@@ -19,7 +19,7 @@ Changes to be made,
 
 2. custos-core-services/utility-services/custos-configuration-service/resource/*-dev.properties 
 
- `iam.server.url=https://{host-name}/auth/`
+   change `iam.server.url=https://{host-name}/auth/`
 
 
 
