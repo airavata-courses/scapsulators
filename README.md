@@ -33,5 +33,6 @@ Changes to be made,
    `mvn antrun:run -P scp-to-remote`
    
  `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml`
+ 
  `helm install cluster-management-core-service /home/shubhpatr/custos/artifacts/cluster-management-core-service-1.1-SNAPSHOT.tgz  -n keycloak`
 
