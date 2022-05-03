@@ -13,11 +13,13 @@ from google.protobuf.json_format import MessageToJson
 class Custos:
     def __init__(self, admin_username, admin_password):
         # read settings
-        self.custos_settings = CustosServerClientSettings(custos_host='custos.scigap.org',
-                        custos_port='31499', 
-                        custos_client_id='custos-nvceqrnlbg6ftlvhsim4-10003424',
-                        custos_client_sec='cA2lzsWR2p1BAdVUx3eORw8GPQbSHyRdJfk1fpKh'
-                        )
+        self.custos_settings = CustosServerClientSettings(custos_host='js-168-203.jetstream-cloud.org',
+                  custos_port='30079',
+                  #custos_client_id='custos-wwiyeainy5iuqp8rf0dh-10003415',
+                  #custos_client_sec='NXiaLSa6mEA2RUl2XyCg2ZRlwTaq2xCvEMQUhP1K'
+                  custos_client_id='custos-uipafoibwln4vv052ere-10000001',
+                  custos_client_sec='Hh8PrnbtYHsMq2eekVFofVN6VC6kqDdWkt5hkZ1M'
+                  )
         # create custos user management client
         self.user_management_client = UserManagementClient(self.custos_settings)
         # create custos group management client

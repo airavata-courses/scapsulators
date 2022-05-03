@@ -70,22 +70,22 @@
     <hashTree>
       <kg.apc.jmeter.threads.UltimateThreadGroup guiclass="kg.apc.jmeter.threads.UltimateThreadGroupGui" testclass="kg.apc.jmeter.threads.UltimateThreadGroup" testname="Custos-Testing-Plan" enabled="true">
         <collectionProp name="ultimatethreadgroupdata">
-          <collectionProp name="-902729876">
-            <stringProp name="48625">100</stringProp>
+          <collectionProp name="1563683199">
+            <stringProp name="1598">20</stringProp>
             <stringProp name="0">0</stringProp>
             <stringProp name="49">1</stringProp>
             <stringProp name="1567">10</stringProp>
             <stringProp name="1567">10</stringProp>
           </collectionProp>
-          <collectionProp name="1373067051">
-            <stringProp name="1507423">1000</stringProp>
+          <collectionProp name="-2003987970">
+            <stringProp name="50547">300</stringProp>
             <stringProp name="1567">10</stringProp>
             <stringProp name="49">1</stringProp>
             <stringProp name="1567">10</stringProp>
             <stringProp name="1567">10</stringProp>
           </collectionProp>
-          <collectionProp name="-1269899143">
-            <stringProp name="52469">500</stringProp>
+          <collectionProp name="-839835652">
+            <stringProp name="48625">100</stringProp>
             <stringProp name="1691">50</stringProp>
             <stringProp name="49">1</stringProp>
             <stringProp name="60">60</stringProp>

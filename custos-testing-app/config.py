@@ -1,5 +1,5 @@
-admin_user_name = 'shmoha@iu.edu'
-admin_password = 'Scapsulators2022!'
+admin_user_name = 'productionadmin'
+admin_password = 'shubham123'
 
 
 # register_users
