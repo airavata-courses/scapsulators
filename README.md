@@ -1,6 +1,7 @@
 Parameters to be added
 
 ```
+UserProfile: staging
 Hostname: js-168-203.jetstream-cloud.org
 SSH_user: shubham
 SSH_user_password: pass123
@@ -17,7 +18,7 @@ Changes to be made,
 
 1. custos-core-services/utility-services/custos-configuration-service/pom.xml --> change skipped to false
 
-2. custos-core-services/utility-services/custos-configuration-service/resource/*-dev.properties 
+2. custos-core-services/utility-services/custos-configuration-service/resource/*-staging.properties 
 
    change `iam.server.url=https://{host-name}:30079/auth/`
 
@@ -36,5 +37,52 @@ Changes to be made,
  
  `helm install cluster-management-core-service /home/shubhpatr/custos/artifacts/cluster-management-core-service-1.1-SNAPSHOT.tgz  -n keycloak`
  
- vault part, change to staging, add super tenant through
+ Login to vault  https://{host_name}:30079 service, 
+ 
+ Enable new engines named "secret" and "resourcesecret". 
+ 
+Post Request to register tenant
+
+```
+{
+    "client_name":"scapsulators",
+    "requester_email":"shmoha@iu.edu",
+    "admin_username":"user",
+    "admin_first_name":"Shubham",
+    "admin_last_name":"Mohapatra",
+    "admin_email":"email@iu.edu",
+    "contacts":["email1@iu.edu","email2@gmail.com"],
+    "redirect_uris":["http://localhost:8080/callback*",
+    "https://{host_name}/callback*"],
+    "scope":"openid profile email org.cilogon.userinfo",
+    "domain":"host_name",
+    "admin_password":"shubham123",
+    "client_uri":"host_name",
+    "logo_uri":"host_name",
+    "application_type":"web",
+    "comment":"Custos super tenant for production"
+}
+```
+
+Open secret in vault, edit 100001 and change supertenant to "true".
+
+Check  if supertenant is active. 
+
+POST https://{host_name}:30079/tenant-management/v1.0.0/status
+
+```
+{
+"client_id":"custos-asdfdff-10000001",
+"status":"ACTIVE",
+"super_tenant":true,
+"updatedBy":"user"
+}
+
+```
+
+
+
+
+
+
 
