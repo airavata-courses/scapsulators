@@ -22,6 +22,9 @@ Changes to be made,
 
    change `iam.server.url=https://{host-name}:30079/auth/`
 
+3. Open custos-integration-services/tenant-management-service-parent/tenant-management-service/src/main/java/tasks/TenantActivationTask.java
+
+   comment lines 225-249
 
 
 -  Build code
