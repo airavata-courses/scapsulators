@@ -25,6 +25,8 @@ Changes to be made,
 3. Open custos-integration-services/tenant-management-service-parent/tenant-management-service/src/main/java/tasks/TenantActivationTask.java
 
    comment lines 225-249
+   
+ 4. Create folder custos in home directory of master and give 777 permission
 
 - Login Docker
    `docker login`
@@ -37,6 +39,8 @@ Changes to be made,
 
 -  deploy artifacts
    `mvn antrun:run -P scp-to-remote`
+   
+ `kubectl delete all --all -n ingress-nginx`  
    
  `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml`
  
