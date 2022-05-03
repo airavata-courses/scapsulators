@@ -26,6 +26,8 @@ Changes to be made,
 
    comment lines 225-249
 
+- Login Docker
+   `docker login`
 
 -  Build code
     `mvn clean install -P container`
