@@ -18,7 +18,8 @@ Changes to be made,
 
 1. custos-core-services/utility-services/custos-configuration-service/pom.xml --> change skipped to false
 
-2. custos-core-services/utility-services/custos-configuration-service/resource/*-staging.properties 
+2. custos-core-services/utility-services/custos-configuration-service/resource/*-dev.properties 
+   custos-core-services/utility-services/custos-configuration-service/resource/*-staging.properties 
 
    change `iam.server.url=https://{host-name}:30079/auth/`
 
@@ -39,6 +40,9 @@ Changes to be made,
 
 -  deploy artifacts
    `mvn antrun:run -P scp-to-remote`
+   
+- if pods are not ready, follow these steps highlighted here. 
+   https://airavata.slack.com/archives/C030JRE25ED/p1651617616011969
    
  `kubectl delete all --all -n ingress-nginx`  
    
