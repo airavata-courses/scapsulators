@@ -20,9 +20,9 @@ docker_repo: scapsulators
    
  `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml`
  
- `helm install cluster-management-core-service /home/ssh_user/custos/artifacts/cluster-management-core-service-1.1-SNAPSHOT.tgz  -n keycloak`
+
  
- Check port number of keycloak and vault service
+ Check port number of keycloak and vault service, and add hostname
 
 
 Changes to be made, 
@@ -55,6 +55,8 @@ Changes to be made,
    
 - if pods are not ready, follow these steps highlighted here. 
    https://airavata.slack.com/archives/C030JRE25ED/p1651617616011969
+   
+ `helm install cluster-management-core-service /home/ssh_user/custos/artifacts/cluster-management-core-service-1.1-SNAPSHOT.tgz  -n keycloak`
    
 
  Login to vault  https://{host_name}:30079 service, 
