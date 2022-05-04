@@ -56,6 +56,7 @@ Changes to be made,
  Enable new engines named "secret" and "resourcesecret". 
  
 Post Request to register tenant
+https://{hostname}:30079/tenant-management/v1.0.0/oauth2/tenant
 
 ```
 {
