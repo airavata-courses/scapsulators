@@ -81,7 +81,7 @@ https://{hostname}:30079/tenant-management/v1.0.0/oauth2/tenant
 
 Open secret in vault, edit 100001 and change supertenant to "true".
 
-Check  if supertenant is active. 
+Set supertenant to active. 
 
 POST https://{host_name}:30079/tenant-management/v1.0.0/status
 
