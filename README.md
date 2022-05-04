@@ -6,6 +6,9 @@ Hostname: js-168-203.jetstream-cloud.org
 SSH_user: shubham
 SSH_user_password: pass123
 SSH_key: your key path
+Vault Scheme: http
+Vault Host: vault.vault.svc.cluster.local
+Vault Port: 8200
 Keycloak_username: admin 
 Keycloak_password: keycloak_pass
 vault_token: vault_token
