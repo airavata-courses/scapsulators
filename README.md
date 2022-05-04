@@ -61,7 +61,7 @@ Changes to be made,
 
  Login to vault  https://{host_name}:30079 service, 
  
- Enable new engines named "secret" and "resourcesecret". 
+ Enable new engines named "secret" select v1 and "resourcesecret". 
  
 Post Request to register tenant
 https://{hostname}:30079/tenant-management/v1.0.0/oauth2/tenant
