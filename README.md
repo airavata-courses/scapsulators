@@ -1,7 +1,7 @@
 Parameters to be added
 
 ```
-UserProfile: staging
+UserProfile: dev
 Hostname: js-168-203.jetstream-cloud.org
 SSH_user: shubham
 SSH_user_password: pass123
