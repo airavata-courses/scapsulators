@@ -19,6 +19,7 @@ Changes to be made,
 1. custos-core-services/utility-services/custos-configuration-service/pom.xml --> change skipped to false
 
 2. custos-core-services/utility-services/custos-configuration-service/resource/*-dev.properties 
+
    custos-core-services/utility-services/custos-configuration-service/resource/*-staging.properties 
 
    change `iam.server.url=https://{host-name}:30079/auth/`
