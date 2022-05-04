@@ -22,7 +22,7 @@ docker_repo: scapsulators
  
 
  
- Check port number of keycloak and vault service, and add hostname
+ Check port number of keycloak and vault service, and add hostname, my port was 30079
 
 
 Changes to be made, 
