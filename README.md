@@ -49,7 +49,7 @@ Changes to be made,
    
  `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml`
  
- `helm install cluster-management-core-service /home/shubhpatr/custos/artifacts/cluster-management-core-service-1.1-SNAPSHOT.tgz  -n keycloak`
+ `helm install cluster-management-core-service /home/shubhpatr/ssh_user/artifacts/cluster-management-core-service-1.1-SNAPSHOT.tgz  -n keycloak`
  
  Login to vault  https://{host_name}:30079 service, 
  
