@@ -27,7 +27,7 @@ docker_repo: scapsulators
 
 Changes to be made, 
 
-1. custos-core-services/utility-services/custos-configuration-service/pom.xml --> change skipped to false
+1. custos-core-services/utility-services/custos-configuration-service/pom.xml --> change skipped to false line 83
 
 2. custos-core-services/utility-services/custos-configuration-service/resource/*-dev.properties 
 
