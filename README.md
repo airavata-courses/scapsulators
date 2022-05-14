@@ -8,9 +8,15 @@ Spring 2022 Project
   <li>Here lies the <b> pith </b> of entire project: <b>Weatherpedia</b>.</li>
   <li>We've implemented Continuous Integration using Circle-CI, and synchronous communication using REST-based microservices.</li>
   <li>All microservices are completely <b> dockerized </b> and ready to interact with each other over the same docker network.</li>
+  <li>A Kubernetes cluster was configured and used for enabling Horizontal-Pod-Autoscaling (HPA) with self-healing pods.</li>
   <li>All you need to do is run the entry-point script provided in this branch!</li>
   <li><b>Note:</b> There is a known <a href="https://github.com/ARM-DOE/pyart/issues/92" target="__blank">issue</a> for lack of <a href="https://arm-doe.github.io/pyart/INSTALL.html" target="__blank">Pyart</a> support on an Apple Macbook, and it might cause errors in creating the weather-report GIF, inspite of dockerizing the Python service. We couldn't test our system on a Macbook just yet.</li>
 </ul>
+
+
+## Demonstration
+
+Head on over to our [Wikis](https://github.com/airavata-courses/scapsulators/wiki/Weather-enthusiasts-assemble) to view a working demo of the final application functionality.
 
 
 ## Installation 
